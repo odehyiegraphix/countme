@@ -1,0 +1,1115 @@
+{
+  "colorSystem": {
+    "name": "Ocean Blue Academic UI",
+    "version": "1.0.0",
+    "description": "Complete color design-token system built around #16587E as the primary brand color.",
+
+    "brand": {
+      "primary": {
+        "50": "#EAF3F7",
+        "100": "#D4E7EF",
+        "200": "#B0D2E0",
+        "300": "#87B9CE",
+        "400": "#5D9DB8",
+        "500": "#2F7195",
+        "600": "#16587E",
+        "700": "#124968",
+        "800": "#0E405D",
+        "900": "#092E43",
+        "950": "#061F2D"
+      },
+
+      "secondary": {
+        "50": "#EDF7FB",
+        "100": "#D9EDF5",
+        "200": "#B9DCEB",
+        "300": "#91C6DB",
+        "400": "#62A9C5",
+        "500": "#28749D",
+        "600": "#236787",
+        "700": "#1D566F",
+        "800": "#17465A",
+        "900": "#103442",
+        "950": "#09232D"
+      },
+
+      "tertiary": {
+        "50": "#F2F8FA",
+        "100": "#E3F0F4",
+        "200": "#C9E1E9",
+        "300": "#A9CDD9",
+        "400": "#8BBACC",
+        "500": "#6FA6C1",
+        "600": "#5B8FA9",
+        "700": "#4A778E",
+        "800": "#3C6072",
+        "900": "#304E5D",
+        "950": "#1F333D"
+      }
+    },
+
+    "neutral": {
+      "50": "#F8FAFB",
+      "100": "#F1F5F7",
+      "200": "#E8F0F4",
+      "300": "#D7E2E7",
+      "400": "#B8C8CF",
+      "500": "#9AADB6",
+      "600": "#7D929D",
+      "700": "#647A86",
+      "800": "#4B606B",
+      "900": "#354851",
+      "950": "#24333A"
+    },
+
+    "text": {
+      "primary": "#16313E",
+      "secondary": "#647A86",
+      "tertiary": "#7D929D",
+      "disabled": "#B8C8CF",
+      "inverse": "#FFFFFF",
+      "link": "#16587E",
+      "linkHover": "#0E405D",
+      "linkVisited": "#4A778E"
+    },
+
+    "background": {
+      "default": "#F8FAFB",
+      "subtle": "#F1F5F7",
+      "muted": "#E8F0F4",
+      "brand": "#EAF3F7",
+      "brandStrong": "#16587E",
+      "inverse": "#0E405D"
+    },
+
+    "surface": {
+      "default": "#FFFFFF",
+      "raised": "#FFFFFF",
+      "subtle": "#F8FAFB",
+      "muted": "#F1F5F7",
+      "brand": "#EAF3F7",
+      "brandStrong": "#16587E",
+      "inverse": "#0E405D"
+    },
+
+    "border": {
+      "default": "#D7E2E7",
+      "subtle": "#E8F0F4",
+      "strong": "#B8C8CF",
+      "brand": "#87B9CE",
+      "brandStrong": "#16587E",
+      "focus": "#2F7195",
+      "inverse": "#FFFFFF"
+    },
+
+    "success": {
+      "50": "#F1FAF3",
+      "100": "#E5F4E8",
+      "200": "#C9E8CF",
+      "300": "#9FD5A9",
+      "400": "#70BC7E",
+      "500": "#218739",
+      "600": "#1C7632",
+      "700": "#17632A",
+      "800": "#125023",
+      "900": "#0C3B19",
+      "950": "#072510",
+      "text": "#17632A",
+      "background": "#E5F4E8",
+      "border": "#9FD5A9"
+    },
+
+    "error": {
+      "50": "#FFF5F5",
+      "100": "#FBE8E8",
+      "200": "#F5CCCC",
+      "300": "#EBA6A6",
+      "400": "#DF7474",
+      "500": "#C93636",
+      "600": "#B52F2F",
+      "700": "#992727",
+      "800": "#7D2020",
+      "900": "#601919",
+      "950": "#3B0D0D",
+      "text": "#992727",
+      "background": "#FBE8E8",
+      "border": "#EBA6A6"
+    },
+
+    "warning": {
+      "50": "#FFF9ED",
+      "100": "#FFF1D2",
+      "200": "#FFE2A3",
+      "300": "#FFCF6A",
+      "400": "#F5B83D",
+      "500": "#D99100",
+      "600": "#BD7C00",
+      "700": "#996300",
+      "800": "#754C00",
+      "900": "#513400",
+      "950": "#2F1D00",
+      "text": "#996300",
+      "background": "#FFF1D2",
+      "border": "#FFCF6A"
+    },
+
+    "info": {
+      "50": "#EFF8FC",
+      "100": "#DFF1F8",
+      "200": "#BFE2F0",
+      "300": "#94CCDF",
+      "400": "#63B0CA",
+      "500": "#28749D",
+      "600": "#236787",
+      "700": "#1D566F",
+      "800": "#17465A",
+      "900": "#103442",
+      "950": "#09232D",
+      "text": "#1D566F",
+      "background": "#DFF1F8",
+      "border": "#94CCDF"
+    },
+
+    "interactive": {
+      "primary": {
+        "default": "#16587E",
+        "hover": "#124968",
+        "active": "#0E405D",
+        "disabled": "#B8C8CF",
+        "disabledText": "#7D929D"
+      },
+
+      "secondary": {
+        "default": "#FFFFFF",
+        "hover": "#EAF3F7",
+        "active": "#D4E7EF",
+        "disabled": "#F1F5F7",
+        "disabledText": "#B8C8CF"
+      },
+
+      "ghost": {
+        "default": "transparent",
+        "hover": "#EAF3F7",
+        "active": "#D4E7EF",
+        "disabled": "transparent"
+      },
+
+      "danger": {
+        "default": "#C93636",
+        "hover": "#B52F2F",
+        "active": "#992727",
+        "disabled": "#EBA6A6"
+      }
+    },
+
+    "focus": {
+      "ring": "#2F7195",
+      "ringOffset": "#FFFFFF",
+      "ringStrong": "#16587E"
+    },
+
+    "selection": {
+      "background": "#B0D2E0",
+      "text": "#0E405D"
+    },
+
+    "overlay": {
+      "light": "rgba(22, 88, 126, 0.08)",
+      "medium": "rgba(22, 88, 126, 0.16)",
+      "dark": "rgba(6, 31, 45, 0.48)",
+      "modal": "rgba(6, 31, 45, 0.56)"
+    },
+
+    "charts": {
+      "primary": "#16587E",
+      "secondary": "#28749D",
+      "tertiary": "#6FA6C1",
+      "quaternary": "#5D9DB8",
+      "success": "#218739",
+      "warning": "#D99100",
+      "error": "#C93636",
+      "info": "#63B0CA",
+      "neutral": "#9AADB6",
+
+      "categorical": [
+        "#16587E",
+        "#28749D",
+        "#6FA6C1",
+        "#5D8FA9",
+        "#218739",
+        "#D99100",
+        "#C93636",
+        "#7D929D"
+      ],
+
+      "attendance": {
+        "present": "#218739",
+        "absent": "#C93636",
+        "late": "#D99100",
+        "excused": "#28749D",
+        "notRecorded": "#9AADB6"
+      }
+    },
+
+    "status": {
+      "active": {
+        "text": "#17632A",
+        "background": "#E5F4E8",
+        "border": "#9FD5A9",
+        "indicator": "#218739"
+      },
+
+      "inactive": {
+        "text": "#647A86",
+        "background": "#F1F5F7",
+        "border": "#D7E2E7",
+        "indicator": "#9AADB6"
+      },
+
+      "pending": {
+        "text": "#996300",
+        "background": "#FFF1D2",
+        "border": "#FFCF6A",
+        "indicator": "#D99100"
+      },
+
+      "error": {
+        "text": "#992727",
+        "background": "#FBE8E8",
+        "border": "#EBA6A6",
+        "indicator": "#C93636"
+      },
+
+      "info": {
+        "text": "#1D566F",
+        "background": "#DFF1F8",
+        "border": "#94CCDF",
+        "indicator": "#28749D"
+      }
+    },
+
+    "darkMode": {
+      "background": {
+        "default": "#09151C",
+        "subtle": "#0E202A",
+        "muted": "#142D38",
+        "brand": "#0E405D"
+      },
+
+      "surface": {
+        "default": "#10232D",
+        "raised": "#142D38",
+        "subtle": "#0E202A",
+        "muted": "#193542"
+      },
+
+      "text": {
+        "primary": "#F1F5F7",
+        "secondary": "#B8C8CF",
+        "tertiary": "#9AADB6",
+        "disabled": "#647A86",
+        "inverse": "#16313E",
+        "link": "#87B9CE",
+        "linkHover": "#B0D2E0"
+      },
+
+      "border": {
+        "default": "#294651",
+        "subtle": "#1F3A45",
+        "strong": "#3C5B67",
+        "brand": "#5D9DB8",
+        "focus": "#87B9CE"
+      },
+
+      "interactive": {
+        "primary": {
+          "default": "#2F7195",
+          "hover": "#5D9DB8",
+          "active": "#87B9CE",
+          "disabled": "#4B606B"
+        }
+      }
+    }
+  }
+}
+Recommended token usage
+
+For the project, I would use the shades consistently rather than manually selecting hex values throughout the UI:
+
+UI element	Recommended token
+Main buttons	primary.600
+Button hover	primary.700
+Button pressed	primary.800
+Main headings	text.primary
+Body text	text.secondary
+Links	text.link
+Page background	background.default
+Cards	surface.default
+Card hover	primary.50
+Borders	border.default
+Input focus	border.focus
+Success	success.500
+Error	error.500
+Warning	warning.500
+Information	info.500
+Present attendance	charts.attendance.present
+Absent attendance	charts.attendance.absent
+Late attendance	charts.attendance.late
+Excused attendance	charts.attendance.excused
+
+
+
+
+
+Typography
+{
+  "typography": {
+    "fontFamily": {
+      "primary": {
+        "name": "Plus Jakarta Sans",
+        "fallback": [
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "sans-serif"
+        ],
+        "usage": "Primary interface, headings, navigation, buttons, forms, tables and general content."
+      },
+
+      "data": {
+        "name": "DM Mono",
+        "fallback": [
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "Monaco",
+          "Consolas",
+          "Liberation Mono",
+          "monospace"
+        ],
+        "usage": "Analytics numbers, IDs, timestamps, attendance codes, percentages and technical data."
+      }
+    },
+
+    "fontWeights": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700,
+      "extrabold": 800
+    },
+
+    "display": {
+      "displayLarge": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "48px",
+        "lineHeight": "56px",
+        "fontWeight": 700,
+        "letterSpacing": "-1.5px",
+        "usage": "Large dashboard hero statistics, major landing-page headings."
+      },
+
+      "displayMedium": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "40px",
+        "lineHeight": "48px",
+        "fontWeight": 700,
+        "letterSpacing": "-1.25px",
+        "usage": "Major page titles and analytics summaries."
+      },
+
+      "displaySmall": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "32px",
+        "lineHeight": "40px",
+        "fontWeight": 700,
+        "letterSpacing": "-0.9px",
+        "usage": "Dashboard headings and major section titles."
+      }
+    },
+
+    "headings": {
+      "h1": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "28px",
+        "lineHeight": "36px",
+        "fontWeight": 700,
+        "letterSpacing": "-0.6px",
+        "usage": "Main page title."
+      },
+
+      "h2": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "24px",
+        "lineHeight": "32px",
+        "fontWeight": 700,
+        "letterSpacing": "-0.45px",
+        "usage": "Major section heading."
+      },
+
+      "h3": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "20px",
+        "lineHeight": "28px",
+        "fontWeight": 700,
+        "letterSpacing": "-0.3px",
+        "usage": "Card headings and subsection titles."
+      },
+
+      "h4": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "18px",
+        "lineHeight": "26px",
+        "fontWeight": 600,
+        "letterSpacing": "-0.2px",
+        "usage": "Small section headings and grouped content."
+      },
+
+      "h5": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "fontWeight": 600,
+        "letterSpacing": "-0.1px",
+        "usage": "Component headings."
+      }
+    },
+
+    "body": {
+      "large": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "16px",
+        "lineHeight": "26px",
+        "fontWeight": 400,
+        "letterSpacing": "0px",
+        "usage": "Important descriptions and larger body content."
+      },
+
+      "medium": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "fontWeight": 400,
+        "letterSpacing": "0px",
+        "usage": "Default application body text."
+      },
+
+      "small": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "13px",
+        "lineHeight": "20px",
+        "fontWeight": 400,
+        "letterSpacing": "0px",
+        "usage": "Secondary descriptions and supporting information."
+      },
+
+      "extraSmall": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "12px",
+        "lineHeight": "18px",
+        "fontWeight": 400,
+        "letterSpacing": "0.05px",
+        "usage": "Fine print, metadata and helper text."
+      }
+    },
+
+    "labels": {
+      "large": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "14px",
+        "lineHeight": "20px",
+        "fontWeight": 600,
+        "letterSpacing": "0px",
+        "usage": "Form labels, navigation labels and prominent UI labels."
+      },
+
+      "medium": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "13px",
+        "lineHeight": "18px",
+        "fontWeight": 600,
+        "letterSpacing": "0px",
+        "usage": "Table headers, filters and component labels."
+      },
+
+      "small": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "12px",
+        "lineHeight": "16px",
+        "fontWeight": 600,
+        "letterSpacing": "0.2px",
+        "usage": "Badges, tags, status labels and compact UI."
+      }
+    },
+
+    "buttons": {
+      "large": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "15px",
+        "lineHeight": "20px",
+        "fontWeight": 600,
+        "letterSpacing": "-0.05px",
+        "usage": "Large primary actions."
+      },
+
+      "medium": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "14px",
+        "lineHeight": "20px",
+        "fontWeight": 600,
+        "letterSpacing": "0px",
+        "usage": "Default buttons."
+      },
+
+      "small": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "13px",
+        "lineHeight": "18px",
+        "fontWeight": 600,
+        "letterSpacing": "0px",
+        "usage": "Compact buttons and table actions."
+      }
+    },
+
+    "navigation": {
+      "primary": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "14px",
+        "lineHeight": "20px",
+        "fontWeight": 600,
+        "letterSpacing": "-0.05px",
+        "usage": "Primary sidebar and navigation items."
+      },
+
+      "secondary": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "13px",
+        "lineHeight": "18px",
+        "fontWeight": 500,
+        "letterSpacing": "0px",
+        "usage": "Secondary navigation."
+      }
+    },
+
+    "data": {
+      "largeNumber": {
+        "fontFamily": "DM Mono",
+        "fontSize": "32px",
+        "lineHeight": "40px",
+        "fontWeight": 500,
+        "letterSpacing": "-1px",
+        "usage": "Large KPI values."
+      },
+
+      "mediumNumber": {
+        "fontFamily": "DM Mono",
+        "fontSize": "24px",
+        "lineHeight": "32px",
+        "fontWeight": 500,
+        "letterSpacing": "-0.7px",
+        "usage": "Medium KPI values."
+      },
+
+      "smallNumber": {
+        "fontFamily": "DM Mono",
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "fontWeight": 500,
+        "letterSpacing": "-0.2px",
+        "usage": "Small statistics and table values."
+      },
+
+      "percentage": {
+        "fontFamily": "DM Mono",
+        "fontSize": "14px",
+        "lineHeight": "20px",
+        "fontWeight": 500,
+        "letterSpacing": "-0.1px",
+        "usage": "Attendance percentages and analytics."
+      },
+
+      "code": {
+        "fontFamily": "DM Mono",
+        "fontSize": "12px",
+        "lineHeight": "18px",
+        "fontWeight": 400,
+        "letterSpacing": "0px",
+        "usage": "Student IDs, course codes and technical identifiers."
+      }
+    }
+  }
+}
+
+
+
+two-font system:
+
+Plus Jakarta Sans → primary UI font. Modern, geometric, clean, excellent for dashboards.
+DM Mono → numbers, attendance codes, IDs, timestamps, analytics/data elements.
+
+This gives the interface a distinctive identity while keeping it highly readable.
+
+1. Typography JSON
+{
+  "typography": {
+    "fontFamily": {
+      "primary": {
+        "name": "Plus Jakarta Sans",
+        "fallback": [
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "sans-serif"
+        ],
+        "usage": "Primary interface, headings, navigation, buttons, forms, tables and general content."
+      },
+
+      "data": {
+        "name": "DM Mono",
+        "fallback": [
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "Monaco",
+          "Consolas",
+          "Liberation Mono",
+          "monospace"
+        ],
+        "usage": "Analytics numbers, IDs, timestamps, attendance codes, percentages and technical data."
+      }
+    },
+
+    "fontWeights": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700,
+      "extrabold": 800
+    },
+
+    "display": {
+      "displayLarge": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "48px",
+        "lineHeight": "56px",
+        "fontWeight": 700,
+        "letterSpacing": "-1.5px",
+        "usage": "Large dashboard hero statistics, major landing-page headings."
+      },
+
+      "displayMedium": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "40px",
+        "lineHeight": "48px",
+        "fontWeight": 700,
+        "letterSpacing": "-1.25px",
+        "usage": "Major page titles and analytics summaries."
+      },
+
+      "displaySmall": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "32px",
+        "lineHeight": "40px",
+        "fontWeight": 700,
+        "letterSpacing": "-0.9px",
+        "usage": "Dashboard headings and major section titles."
+      }
+    },
+
+    "headings": {
+      "h1": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "28px",
+        "lineHeight": "36px",
+        "fontWeight": 700,
+        "letterSpacing": "-0.6px",
+        "usage": "Main page title."
+      },
+
+      "h2": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "24px",
+        "lineHeight": "32px",
+        "fontWeight": 700,
+        "letterSpacing": "-0.45px",
+        "usage": "Major section heading."
+      },
+
+      "h3": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "20px",
+        "lineHeight": "28px",
+        "fontWeight": 700,
+        "letterSpacing": "-0.3px",
+        "usage": "Card headings and subsection titles."
+      },
+
+      "h4": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "18px",
+        "lineHeight": "26px",
+        "fontWeight": 600,
+        "letterSpacing": "-0.2px",
+        "usage": "Small section headings and grouped content."
+      },
+
+      "h5": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "fontWeight": 600,
+        "letterSpacing": "-0.1px",
+        "usage": "Component headings."
+      }
+    },
+
+    "body": {
+      "large": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "16px",
+        "lineHeight": "26px",
+        "fontWeight": 400,
+        "letterSpacing": "0px",
+        "usage": "Important descriptions and larger body content."
+      },
+
+      "medium": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "fontWeight": 400,
+        "letterSpacing": "0px",
+        "usage": "Default application body text."
+      },
+
+      "small": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "13px",
+        "lineHeight": "20px",
+        "fontWeight": 400,
+        "letterSpacing": "0px",
+        "usage": "Secondary descriptions and supporting information."
+      },
+
+      "extraSmall": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "12px",
+        "lineHeight": "18px",
+        "fontWeight": 400,
+        "letterSpacing": "0.05px",
+        "usage": "Fine print, metadata and helper text."
+      }
+    },
+
+    "labels": {
+      "large": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "14px",
+        "lineHeight": "20px",
+        "fontWeight": 600,
+        "letterSpacing": "0px",
+        "usage": "Form labels, navigation labels and prominent UI labels."
+      },
+
+      "medium": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "13px",
+        "lineHeight": "18px",
+        "fontWeight": 600,
+        "letterSpacing": "0px",
+        "usage": "Table headers, filters and component labels."
+      },
+
+      "small": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "12px",
+        "lineHeight": "16px",
+        "fontWeight": 600,
+        "letterSpacing": "0.2px",
+        "usage": "Badges, tags, status labels and compact UI."
+      }
+    },
+
+    "buttons": {
+      "large": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "15px",
+        "lineHeight": "20px",
+        "fontWeight": 600,
+        "letterSpacing": "-0.05px",
+        "usage": "Large primary actions."
+      },
+
+      "medium": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "14px",
+        "lineHeight": "20px",
+        "fontWeight": 600,
+        "letterSpacing": "0px",
+        "usage": "Default buttons."
+      },
+
+      "small": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "13px",
+        "lineHeight": "18px",
+        "fontWeight": 600,
+        "letterSpacing": "0px",
+        "usage": "Compact buttons and table actions."
+      }
+    },
+
+    "navigation": {
+      "primary": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "14px",
+        "lineHeight": "20px",
+        "fontWeight": 600,
+        "letterSpacing": "-0.05px",
+        "usage": "Primary sidebar and navigation items."
+      },
+
+      "secondary": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "13px",
+        "lineHeight": "18px",
+        "fontWeight": 500,
+        "letterSpacing": "0px",
+        "usage": "Secondary navigation."
+      }
+    },
+
+    "data": {
+      "largeNumber": {
+        "fontFamily": "DM Mono",
+        "fontSize": "32px",
+        "lineHeight": "40px",
+        "fontWeight": 500,
+        "letterSpacing": "-1px",
+        "usage": "Large KPI values."
+      },
+
+      "mediumNumber": {
+        "fontFamily": "DM Mono",
+        "fontSize": "24px",
+        "lineHeight": "32px",
+        "fontWeight": 500,
+        "letterSpacing": "-0.7px",
+        "usage": "Medium KPI values."
+      },
+
+      "smallNumber": {
+        "fontFamily": "DM Mono",
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "fontWeight": 500,
+        "letterSpacing": "-0.2px",
+        "usage": "Small statistics and table values."
+      },
+
+      "percentage": {
+        "fontFamily": "DM Mono",
+        "fontSize": "14px",
+        "lineHeight": "20px",
+        "fontWeight": 500,
+        "letterSpacing": "-0.1px",
+        "usage": "Attendance percentages and analytics."
+      },
+
+      "code": {
+        "fontFamily": "DM Mono",
+        "fontSize": "12px",
+        "lineHeight": "18px",
+        "fontWeight": 400,
+        "letterSpacing": "0px",
+        "usage": "Student IDs, course codes and technical identifiers."
+      }
+    }
+  }
+}
+2. The hierarchy I'd use
+
+The important thing is not just having many sizes. The interface should have a very deliberate hierarchy.
+
+For example, an attendance dashboard could look like:
+
+Page title
+
+Attendance Overview
+
+28px / 700
+
+Supporting description
+
+Monitor attendance trends, student participation and class performance.
+
+14px / 400
+
+KPI
+
+94.72%
+
+32px / DM Mono / 500
+
+KPI label
+
+Overall Attendance
+
+13px / 600
+
+Trend
+
++3.42%
+
+14px / DM Mono / 500
+
+Chart heading
+
+Attendance Trend
+
+18px / 600
+
+Chart labels
+
+Week 01 · Week 02 · Week 03
+
+12px / 500
+
+This creates a much stronger visual rhythm than making every piece of text the same size.
+
+3. A distinctive feature: Data Typography
+
+For an attendance and analytics system, I'd make numbers visually different from normal text.
+
+For example:
+
+┌──────────────────────────────────┐
+│ Overall Attendance               │
+│                                  │
+│ 94.72%                           │
+│ +3.42% from last month           │
+└──────────────────────────────────┘
+
+The 94.72% uses DM Mono, while everything else uses Plus Jakarta Sans.
+
+This creates a subtle analytics / technology identity without making the entire interface look overly futuristic.
+
+4. Responsive typography
+
+I would also avoid making the desktop typography simply shrink proportionally.
+
+{
+  "responsiveTypography": {
+    "desktop": {
+      "displayLarge": "48px",
+      "displayMedium": "40px",
+      "displaySmall": "32px",
+      "h1": "28px",
+      "h2": "24px",
+      "h3": "20px",
+      "body": "14px"
+    },
+
+    "tablet": {
+      "displayLarge": "42px",
+      "displayMedium": "36px",
+      "displaySmall": "30px",
+      "h1": "26px",
+      "h2": "22px",
+      "h3": "19px",
+      "body": "14px"
+    },
+
+    "mobile": {
+      "displayLarge": "36px",
+      "displayMedium": "32px",
+      "displaySmall": "28px",
+      "h1": "24px",
+      "h2": "21px",
+      "h3": "18px",
+      "body": "14px"
+    }
+  }
+}
+One important rule
+
+I would not go below 14px for normal application body text.
+
+Use 12px–13px only for metadata, badges, table headers, timestamps and other secondary information.
+
+5. Letter-spacing philosophy
+
+I'd keep the typography relatively tight for headings:
+
+Large heading      -1.5px
+Medium heading     -1.0px
+Small heading      -0.3px
+Body               0px
+Labels             0px
+Data               -0.2px
+
+This is what gives the typography that modern SaaS/dashboard appearance.
+
+Avoid excessive letter spacing such as:
+
+A T T E N D A N C E
+
+unless you're intentionally creating an eyebrow/section label.
+
+For those, you can use:
+
+{
+  "eyebrow": {
+    "fontFamily": "Plus Jakarta Sans",
+    "fontSize": "11px",
+    "lineHeight": "16px",
+    "fontWeight": 700,
+    "letterSpacing": "0.8px",
+    "textTransform": "uppercase"
+  }
+}
+6. My recommended visual combination
+
+For your project, I'd establish this as the core identity:
+
+Brand
+
+#16587E
+
+Primary typeface
+
+Plus Jakarta Sans
+
+Data typeface
+
+DM Mono
+
+Page title
+
+28px / 700
+
+Section title
+
+20px / 700
+
+Body
+
+14px / 400
+
+Navigation
+
+14px / 600
+
+KPI
+
+32px / DM Mono / 500
+
+Small metadata
+
+12px / 500

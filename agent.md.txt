@@ -1,0 +1,1740 @@
+# AGENT.md
+
+## Secure Geo-Location and Dynamic QR-Based Attendance Management System
+
+### AI Coding Agent Instructions
+
+---
+
+# 1. Project Identity
+
+You are the primary AI software engineering agent working on:
+
+**Secure Geo-Location and Dynamic QR-Based Attendance Management System with Academic Performance Analytics**
+
+The system is a responsive web application for tertiary institutions.
+
+Its core purpose is to provide a secure, auditable attendance process using:
+
+* Authentication
+* Dynamic QR codes
+* Geolocation verification
+* Location accuracy validation
+* Application-level device binding
+* Database-level duplicate prevention
+* Attendance attempt logging
+* Controlled manual attendance
+* Audit logging
+* Rule-based anomaly detection
+* Academic performance analytics
+* Role-based stakeholder access
+
+The system is NOT simply a QR attendance application.
+
+The core technical contribution is:
+
+> Dynamic QR verification + authenticated identity + geolocation + device binding + database integrity + auditability + academic performance analytics.
+
+---
+
+# 2. Source of Truth
+
+The primary source of truth for product requirements is:
+
+```text
+PRD_Geo-QR_Attendance_System_v2.0.md
+```
+
+Before implementing a feature:
+
+1. Read the relevant PRD section.
+2. Understand the business rule.
+3. Check whether the feature already exists.
+4. Implement the smallest solution that satisfies the requirement.
+5. Do not invent additional business requirements without documenting the decision.
+
+If the PRD does not define something essential to implementation:
+
+* Make the smallest reasonable technical assumption.
+* Document the assumption.
+* Prefer consistency with existing architecture.
+* Do not silently introduce major features.
+
+---
+
+# 3. Development Philosophy
+
+Follow these principles throughout development.
+
+### 3.1 Security First
+
+Attendance data is academic data.
+
+Treat:
+
+* student identity
+* location
+* attendance
+* academic performance
+* parent relationships
+* audit records
+
+as sensitive information.
+
+Never expose information simply because it is technically accessible.
+
+Always enforce authorization on the server.
+
+---
+
+### 3.2 Server Is the Authority
+
+Never trust the browser for security decisions.
+
+The client may provide:
+
+* QR token
+* coordinates
+* device identifier
+* session identifier
+* student information
+
+but the server must validate all important conditions.
+
+Never rely on:
+
+```text
+frontend validation alone
+```
+
+for:
+
+* authentication
+* authorization
+* QR validity
+* attendance eligibility
+* enrollment
+* location acceptance
+* duplicate prevention
+* manual attendance permissions
+
+---
+
+### 3.3 Small, Testable Changes
+
+Do not make large uncontrolled changes.
+
+For every feature:
+
+1. Understand the requirement.
+2. Identify affected modules.
+3. Implement.
+4. Test.
+5. Check for regressions.
+6. Document important architectural decisions.
+
+Prefer small commits and logically isolated changes.
+
+---
+
+### 3.4 Do Not Overengineer
+
+This is a final-year project prototype.
+
+Do not introduce:
+
+* unnecessary microservices
+* Kubernetes
+* event-driven infrastructure
+* machine-learning pipelines
+* complex distributed systems
+* unnecessary third-party services
+
+unless explicitly required.
+
+Prefer a modular monolith with a clean architecture.
+
+---
+
+# 4. Recommended Technology Stack
+
+Use the following stack unless the project requirements explicitly change.
+
+## Frontend
+
+```text
+React
+```
+
+Responsibilities:
+
+* UI
+* QR scanner
+* dashboards
+* forms
+* charts
+* location permission
+* responsive interfaces
+
+---
+
+## Backend
+
+```text
+Laravel REST API
+```
+
+Responsibilities:
+
+* Authentication
+* Authorization
+* Business logic
+* QR generation/validation
+* Attendance engine
+* Geolocation validation
+* Device binding
+* CSV processing
+* Analytics
+* Reporting
+* Audit logging
+
+---
+
+## Database
+
+```text
+MySQL
+```
+
+Use:
+
+* foreign keys
+* indexes
+* unique constraints
+* transactions
+* appropriate data types
+
+---
+
+## QR Security
+
+Use:
+
+```text
+Short-lived signed QR tokens
+```
+
+HMAC or another appropriate server-side signing mechanism may be used.
+
+The exact implementation must remain server-authoritative.
+
+---
+
+## Geolocation
+
+Use:
+
+```text
+Browser Geolocation API
+```
+
+Distance:
+
+```text
+Haversine formula
+```
+
+---
+
+## Charts
+
+Use:
+
+```text
+Recharts
+```
+
+or another lightweight charting library if the existing frontend architecture already uses one.
+
+---
+
+# 5. Core Architecture
+
+Use a modular monolithic architecture.
+
+```text
+React Frontend
+       |
+       | HTTPS / REST API
+       |
+Laravel Backend
+       |
+       +-- Authentication
+       +-- Authorization
+       +-- User Management
+       +-- Academic Structure
+       +-- Session Management
+       +-- QR Engine
+       +-- Attendance Engine
+       +-- Geolocation Service
+       +-- Device Binding
+       +-- Audit Service
+       +-- Anomaly Detection
+       +-- Performance Import
+       +-- Analytics
+       +-- Reporting
+       |
+MySQL
+```
+
+Keep business logic out of React wherever security or data integrity is involved.
+
+---
+
+# 6. Core Domain Modules
+
+Organize the application around these modules:
+
+```text
+Authentication
+Users
+Roles & Permissions
+Departments
+Courses
+Course Offerings
+Enrollments
+Class Sessions
+QR Tokens
+Attendance
+Attendance Attempts
+Device Bindings
+Manual Attendance
+Audit Logs
+Anomaly Detection
+Performance Records
+Analytics
+Parent-Ward Relationships
+Reports
+```
+
+Each module should have clear responsibilities.
+
+Avoid creating a single giant controller or service.
+
+---
+
+# 7. User Roles
+
+The system has five primary roles:
+
+```text
+STUDENT
+LECTURER
+PARENT
+Administrator
+ADMIN
+```
+
+Do not add additional roles unless the PRD is updated.
+
+---
+
+# 8. Authorization Rules
+
+## Student
+
+Can:
+
+* view own profile
+* view own courses
+* scan attendance QR
+* submit attendance
+* view own attendance
+* view own performance analytics where permitted
+
+Cannot:
+
+* access another student's attendance
+* create sessions
+* modify attendance
+* view administrative data
+
+---
+
+## Lecturer
+
+Can:
+
+* manage assigned courses
+* create sessions for assigned courses
+* start/end sessions
+* display dynamic QR
+* view attendance for assigned courses
+* review failed attempts
+* create manual attendance
+* upload performance results
+* view course analytics
+
+Cannot:
+
+* manage unrelated courses
+* access unrelated departments
+* modify system-level settings
+
+---
+
+## Parent
+
+Can:
+
+* view linked wards
+* view ward attendance
+* view relevant attendance summaries
+
+Cannot:
+
+* modify attendance
+* view unrelated students
+* access lecturer/admin functionality
+
+---
+
+## Administrator
+
+Can:
+
+* view authorized department data
+* view course attendance
+* view attendance trends
+* view performance summaries
+* review relevant alerts
+
+Cannot:
+
+* access unrelated departments unless explicitly authorized
+
+---
+
+## Administrator
+
+Can:
+
+* manage users
+* manage roles
+* manage departments
+* manage courses
+* manage parent relationships
+* review audit logs
+* review anomalies
+* generate reports
+* configure system-level settings
+
+---
+
+# 9. Attendance Engine
+
+The attendance engine is the most important component of the system.
+
+Do not implement attendance as:
+
+```text
+scan QR -> mark present
+```
+
+Instead use:
+
+```text
+Authentication
+      ↓
+Session Validation
+      ↓
+QR Validation
+      ↓
+Enrollment Validation
+      ↓
+Time Validation
+      ↓
+Location Validation
+      ↓
+Location Accuracy
+      ↓
+Device Validation
+      ↓
+Duplicate Validation
+      ↓
+Create Attendance
+```
+
+Every stage must have a clear success/failure state.
+
+---
+
+# 10. Attendance Validation Rules
+
+A student receives:
+
+```text
+VERIFIED
+```
+
+only when all required conditions pass.
+
+Conceptually:
+
+```text
+Authenticated
+AND
+Active Session
+AND
+Valid QR
+AND
+Correct Course Enrollment
+AND
+Valid Time
+AND
+Location Within Radius
+AND
+Acceptable Location Accuracy
+AND
+Valid Device
+AND
+No Existing Attendance
+```
+
+If any required condition fails:
+
+```text
+Do not create verified attendance.
+```
+
+Instead:
+
+```text
+Create Attendance Attempt
++
+Store Failure Reason
+```
+
+---
+
+# 11. Attendance Attempt vs Attendance Record
+
+These are different concepts.
+
+## Attendance Attempt
+
+Represents an attempt to submit attendance.
+
+Possible results:
+
+```text
+VERIFIED
+OUT_OF_RANGE
+LOW_LOCATION_ACCURACY
+INVALID_QR
+EXPIRED_QR
+NOT_ENROLLED
+DUPLICATE
+INVALID_SESSION
+DEVICE_FLAGGED
+REJECTED
+```
+
+---
+
+## Attendance Record
+
+Represents official attendance.
+
+Possible methods:
+
+```text
+VERIFIED
+MANUAL
+```
+
+Never overwrite the original failed attempt simply because a lecturer later approves a manual exception.
+
+The history must remain auditable.
+
+---
+
+# 12. Dynamic QR Rules
+
+QR codes must be:
+
+* generated by the server
+* short-lived
+* session-specific
+* cryptographically protected
+* validated server-side
+
+Conceptual payload:
+
+```text
+session_id
+token_id
+expiration
+signature
+```
+
+Do not place unnecessary sensitive information in the QR.
+
+---
+
+## QR Validation
+
+Reject:
+
+* expired QR
+* invalid signature
+* unknown token
+* inactive session
+* invalid session
+* malformed token
+* replayed token where applicable
+
+Do not trust:
+
+```text
+QR data supplied by frontend
+```
+
+until it has been validated by the backend.
+
+---
+
+# 13. QR Rotation
+
+The active session should periodically receive a new valid token.
+
+Conceptually:
+
+```text
+Session starts
+      ↓
+Token A generated
+      ↓
+Token A expires
+      ↓
+Token B generated
+      ↓
+Token B expires
+      ↓
+Token C generated
+```
+
+The exact interval should be configurable.
+
+Do not hard-code the interval in multiple parts of the application.
+
+Create a single configuration value.
+
+---
+
+# 14. Geolocation Rules
+
+The browser provides:
+
+```text
+latitude
+longitude
+accuracy
+```
+
+The backend calculates distance from:
+
+```text
+Student location
+```
+
+to:
+
+```text
+Session location
+```
+
+Use the Haversine formula or equivalent.
+
+---
+
+## Acceptance
+
+If:
+
+```text
+distance <= allowed_radius
+```
+
+and location accuracy is acceptable:
+
+```text
+continue validation
+```
+
+Otherwise:
+
+```text
+reject automated attendance
+```
+
+and record the attempt.
+
+---
+
+# 15. Out-of-Range Rule
+
+Never silently convert an out-of-range attempt into attendance.
+
+Example:
+
+```text
+Student
+   ↓
+Scan QR
+   ↓
+Location = 180m away
+Allowed radius = 100m
+   ↓
+OUT_OF_RANGE
+   ↓
+Attendance NOT created
+   ↓
+Attempt logged
+```
+
+The lecturer may later use the manual exception workflow if there is a legitimate reason.
+
+---
+
+# 16. Location Accuracy
+
+GPS coordinates are not perfect.
+
+Do not assume:
+
+```text
+accuracy = 0
+```
+
+means perfect location.
+
+Consider the reported accuracy when deciding whether automated verification is reliable.
+
+The exact threshold should be configurable.
+
+Do not scatter arbitrary values throughout the code.
+
+---
+
+# 17. Device Binding
+
+Device binding is a supporting security signal.
+
+It is NOT proof of physical identity.
+
+Do not use:
+
+```text
+IMEI
+MAC address
+```
+
+or other restricted hardware identifiers.
+
+Use an application-level identifier permitted by the platform.
+
+---
+
+## Device Rules
+
+When registering a device:
+
+```text
+Authenticated User
+      ↓
+Generate/obtain application-level identifier
+      ↓
+Store binding
+```
+
+During attendance:
+
+```text
+Current device
+      ↓
+Compare with registered binding
+      ↓
+Valid / Flagged
+```
+
+A device associated with many student accounts may generate an anomaly.
+
+Do not automatically accuse the student of fraud.
+
+---
+
+# 18. Duplicate Prevention
+
+Duplicate prevention must exist at two levels.
+
+## Application Level
+
+Check:
+
+```text
+Does attendance already exist?
+```
+
+## Database Level
+
+Use a unique constraint:
+
+```text
+(session_id, student_id)
+```
+
+The database constraint is mandatory.
+
+Never rely only on frontend or application-level checking.
+
+Use transactions where necessary.
+
+---
+
+# 19. Manual Attendance
+
+Manual attendance is an exception mechanism.
+
+Valid examples:
+
+* phone unavailable
+* camera problem
+* GPS failure
+* institution-approved exception
+
+Manual attendance must require:
+
+```text
+student
+session
+lecturer
+reason
+timestamp
+method = MANUAL
+```
+
+---
+
+## Manual Attendance Rules
+
+Never allow:
+
+```text
+manual attendance without reason
+```
+
+Never hide manual attendance inside normal verified attendance.
+
+The dashboard should distinguish:
+
+```text
+Verified Attendance
+Manual Attendance
+```
+
+---
+
+# 20. Manual Override Monitoring
+
+Track:
+
+```text
+manual attendance count
+```
+
+per:
+
+* lecturer
+* session
+* course
+* student
+* period
+
+If the count becomes unusually high:
+
+```text
+generate review alert
+```
+
+This is an alert, not an automatic accusation.
+
+---
+
+# 21. Audit Logging
+
+Important actions must be auditable.
+
+Examples:
+
+```text
+User login
+Session creation
+Session start
+Session end
+Manual attendance
+User role change
+Course assignment
+Parent-ward linking
+Attendance review
+Suspicious activity review
+Device reset
+Administrative changes
+```
+
+Audit logs should include:
+
+```text
+user_id
+action
+target_type
+target_id
+timestamp
+metadata
+```
+
+Do not allow ordinary users to modify audit records.
+
+---
+
+# 22. Anomaly Detection
+
+Use simple rule-based anomaly detection.
+
+Do not introduce machine learning unless explicitly required.
+
+Examples:
+
+### Device anomaly
+
+```text
+IF one device -> many student accounts
+THEN flag
+```
+
+### Student location anomaly
+
+```text
+IF repeated out-of-range attempts
+THEN flag
+```
+
+### Accuracy anomaly
+
+```text
+IF repeated poor-location readings
+THEN flag
+```
+
+### Lecturer anomaly
+
+```text
+IF unusually high manual attendance rate
+THEN flag
+```
+
+### QR anomaly
+
+```text
+IF repeated invalid/expired QR attempts
+THEN flag
+```
+
+Alerts should be reviewable.
+
+Do not automatically label users as dishonest.
+
+---
+
+# 23. Database Rules
+
+Use proper relational design.
+
+Core entities:
+
+```text
+users
+departments
+courses
+course_offerings
+enrollments
+class_sessions
+qr_tokens
+device_bindings
+attendance_attempts
+attendance_records
+performance_records
+parent_ward_relationships
+audit_logs
+```
+
+---
+
+## Required Relationships
+
+```text
+Department
+    ↓
+Course
+    ↓
+Course Offering
+    ↓
+Enrollment
+    ↓
+Student
+```
+
+And:
+
+```text
+Course Offering
+    ↓
+Class Sessions
+    ↓
+Attendance Attempts
+    ↓
+Attendance Records
+```
+
+---
+
+# 24. Database Integrity
+
+Use:
+
+* foreign keys
+* indexes
+* unique constraints
+* transactions
+* appropriate nullable/non-nullable fields
+
+Do not duplicate data unnecessarily.
+
+Never use application logic alone when a database constraint can guarantee integrity.
+
+---
+
+# 25. CSV Performance Import
+
+The prototype uses a defined CSV format.
+
+Expected:
+
+```csv
+student_id,assessment_type,score,total_score
+ST001,Quiz,15,20
+ST002,Quiz,18,20
+ST003,Quiz,12,20
+```
+
+Validate:
+
+* headers
+* student ID
+* score
+* total score
+* course relationship
+* duplicate rows
+
+Do not silently import malformed records.
+
+Show useful validation errors.
+
+---
+
+# 26. Academic Analytics
+
+Calculate:
+
+### Student
+
+```text
+Attendance %
+Sessions attended
+Sessions missed
+Verified attendance
+Manual attendance
+Average score
+Performance trend
+```
+
+### Course
+
+```text
+Average attendance
+Average performance
+Attendance trend
+Performance trend
+Correlation
+```
+
+### Department
+
+```text
+Course attendance
+Course performance
+Attendance trends
+Relevant alerts
+```
+
+---
+
+# 27. Correlation Rules
+
+Pearson correlation may be used where sufficient valid data exists.
+
+Never present:
+
+```text
+correlation = causation
+```
+
+Use wording such as:
+
+```text
+Attendance and performance show a positive correlation in this dataset.
+```
+
+Do not claim:
+
+```text
+Attendance caused the performance improvement.
+```
+
+If there is insufficient data:
+
+```text
+Do not calculate or display a misleading correlation.
+```
+
+---
+
+# 28. Privacy Rules
+
+Only collect location when attendance verification requires it.
+
+Do not implement continuous location tracking.
+
+Users must only access information within their authorized scope.
+
+Never expose:
+
+* another student's exact location
+* unrelated attendance
+* unrelated performance
+* private audit metadata
+
+through an unauthorized endpoint.
+
+---
+
+# 29. API Security
+
+Every protected API route must verify:
+
+```text
+Authentication
++
+Authorization
++
+Resource ownership/scope
+```
+
+Do not assume:
+
+```text
+if user is logged in -> user can access resource
+```
+
+For example:
+
+```text
+GET /students/123/attendance
+```
+
+must verify that the current user is allowed to access student 123.
+
+---
+
+# 30. Error Handling
+
+Errors should be:
+
+* clear
+* safe
+* actionable
+* non-sensitive
+
+Good:
+
+```text
+Attendance could not be verified because you are outside the authorized attendance area.
+```
+
+Bad:
+
+```text
+SQL exception: attendance_sessions table query failed...
+```
+
+Never expose:
+
+* stack traces
+* SQL queries
+* secrets
+* internal tokens
+* database credentials
+
+to users.
+
+---
+
+# 31. Frontend Rules
+
+The frontend should:
+
+* be responsive
+* prioritize mobile for students
+* prioritize desktop/tablet for lecturer dashboards
+* show clear loading states
+* show clear validation states
+* handle camera permissions
+* handle location permissions
+* handle denied permissions gracefully
+* prevent repeated submission while processing
+
+Do not rely on frontend restrictions for security.
+
+---
+
+# 32. Attendance UX
+
+The student attendance flow should be simple:
+
+```text
+Open Attendance
+      ↓
+Scan QR
+      ↓
+Allow Location
+      ↓
+Validating...
+      ↓
+Success / Failure
+```
+
+Success should clearly show:
+
+```text
+Attendance recorded
+Method: Verified
+Time: ...
+Course: ...
+```
+
+Failure should explain the reason without exposing sensitive implementation details.
+
+---
+
+# 33. Lecturer Dashboard
+
+The lecturer should be able to see:
+
+```text
+Active Session
+QR Code
+Total Enrolled
+Verified Present
+Manual Present
+Failed Attempts
+Attendance Percentage
+```
+
+A session should make the distinction between:
+
+```text
+VERIFIED
+MANUAL
+FLAGGED
+```
+
+visually clear.
+
+---
+
+# 34. Development Workflow
+
+For every task:
+
+### Step 1
+
+Read the relevant PRD requirement.
+
+### Step 2
+
+Inspect the existing code.
+
+Do not assume the project structure.
+
+### Step 3
+
+Identify affected:
+
+* frontend
+* backend
+* database
+* API
+* tests
+
+### Step 4
+
+Implement the smallest complete change.
+
+### Step 5
+
+Run relevant tests.
+
+### Step 6
+
+Check:
+
+* authorization
+* validation
+* error handling
+* database integrity
+* responsive behavior
+
+### Step 7
+
+Review for regressions.
+
+### Step 8
+
+Document important architectural changes.
+
+---
+
+# 35. Before Writing Code
+
+Always inspect:
+
+```text
+package.json
+composer.json
+.env.example
+database migrations
+routes
+controllers
+models
+services
+frontend structure
+existing components
+existing tests
+```
+
+Do not create duplicate infrastructure when an existing implementation already performs the required function.
+
+---
+
+# 36. Database Migration Rules
+
+Never manually modify production database structure outside migrations.
+
+Every schema change must have a migration.
+
+Migrations must:
+
+* be reversible where practical
+* define foreign keys correctly
+* define indexes
+* define unique constraints
+* avoid destructive changes unless explicitly required
+
+---
+
+# 37. API Design Rules
+
+Use RESTful naming.
+
+Prefer:
+
+```text
+POST /sessions
+POST /sessions/{id}/start
+POST /sessions/{id}/end
+GET /sessions/{id}
+GET /sessions/{id}/attendance
+```
+
+Avoid inconsistent endpoint naming.
+
+Return consistent response structures.
+
+---
+
+# 38. Transaction Rules
+
+Use database transactions for operations where partial completion would corrupt attendance integrity.
+
+Especially:
+
+```text
+Attendance creation
+Manual attendance creation
+Enrollment operations
+Critical administrative changes
+```
+
+For example:
+
+```text
+Validate attendance
+      ↓
+Begin transaction
+      ↓
+Check duplicate
+      ↓
+Create attendance
+      ↓
+Create audit record
+      ↓
+Commit
+```
+
+If a critical step fails:
+
+```text
+Rollback
+```
+
+---
+
+# 39. Testing Requirements
+
+Every major feature must have tests.
+
+Priority areas:
+
+```text
+Authentication
+Authorization
+QR validation
+QR expiration
+Geolocation
+Enrollment
+Device binding
+Duplicate prevention
+Manual attendance
+Audit logging
+CSV import
+Analytics
+Parent access
+Administrator access
+```
+
+---
+
+# 40. Mandatory Attendance Test Cases
+
+At minimum test:
+
+```text
+Valid QR + valid location
+Expired QR
+Invalid QR
+Tampered QR
+Inactive session
+Wrong course
+Not enrolled
+Outside radius
+Poor location accuracy
+Duplicate scan
+Invalid device
+Valid manual attendance
+Manual attendance without reason
+Unauthorized manual attendance
+Parent accessing unrelated student
+Lecturer accessing unrelated course
+```
+
+---
+
+# 41. Security Test Mindset
+
+For every endpoint ask:
+
+```text
+What happens if:
+```
+
+* user is unauthenticated?
+* user has the wrong role?
+* user changes the ID?
+* user sends another student's ID?
+* request is duplicated?
+* request is modified?
+* token is expired?
+* token is replayed?
+* data is missing?
+* data is malformed?
+
+Security testing should be part of normal development, not something done only at the end.
+
+---
+
+# 42. Performance
+
+The prototype target for normal attendance validation is approximately:
+
+```text
+≤ 3 seconds
+```
+
+under normal network conditions.
+
+Do not optimize prematurely.
+
+First ensure:
+
+```text
+correctness
+security
+integrity
+```
+
+Then optimize measured bottlenecks.
+
+---
+
+# 43. Offline Strategy
+
+The project is online-first.
+
+Normal QR attendance requires network connectivity because the server must validate:
+
+* QR
+* session
+* enrollment
+* duplicate status
+* device
+* attendance state
+
+Do not implement offline attendance synchronization unless the PRD is explicitly updated.
+
+Manual exception attendance may be used when automated verification cannot be completed.
+
+---
+
+# 44. Logging
+
+Application logs must be useful for debugging but must not contain sensitive information unnecessarily.
+
+Never log:
+
+```text
+passwords
+authentication secrets
+private tokens
+full sensitive payloads
+```
+
+Use structured logging where practical.
+
+---
+
+# 45. Configuration
+
+Keep configurable values in environment/configuration rather than hardcoding them.
+
+Examples:
+
+```text
+QR expiration
+allowed location accuracy
+default attendance radius
+session duration
+rate limits
+```
+
+Do not duplicate configuration values across files.
+
+---
+
+# 46. Environment Variables
+
+Never commit:
+
+```text
+.env
+```
+
+or secrets.
+
+Provide:
+
+```text
+.env.example
+```
+
+with safe placeholders.
+
+Examples:
+
+```text
+APP_URL=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+```
+
+Do not place real credentials in source code.
+
+---
+
+# 47. Git Rules
+
+Use clear commit messages.
+
+Examples:
+
+```text
+feat: add dynamic QR session generation
+feat: implement geolocation attendance validation
+fix: prevent duplicate attendance records
+feat: add manual attendance audit logging
+test: add QR expiration tests
+refactor: separate attendance validation service
+```
+
+Do not commit:
+
+* secrets
+* temporary debug files
+* generated credentials
+* unnecessary build artifacts
+
+---
+
+# 48. Code Quality
+
+Prefer:
+
+* descriptive names
+* small functions
+* clear service boundaries
+* reusable validation
+* reusable components
+* type safety where available
+* meaningful comments
+
+Avoid:
+
+* giant functions
+* duplicated validation logic
+* magic numbers
+* unexplained business rules
+* deeply nested conditionals where simpler structures exist
+
+---
+
+# 49. Comments
+
+Comments should explain:
+
+```text
+WHY
+```
+
+not merely:
+
+```text
+WHAT
+```
+
+Bad:
+
+```text
+// Check location
+```
+
+Better:
+
+```text
+// Automated attendance is rejected when the reported location
+// falls outside the configured session radius.
+```
+
+Do not write excessive comments.
+
+---
+
+# 50. Do Not Change Business Rules Silently
+
+Do not silently change:
+
+* attendance acceptance rules
+* QR expiration behavior
+* manual attendance rules
+* location rules
+* device rules
+* user permissions
+* analytics definitions
+
+If a change is necessary:
+
+1. Explain why.
+2. Document the decision.
+3. Update the relevant PRD section.
+4. Update tests.
+
+---
+
+# 51. Definition of Done
+
+A feature is not complete merely because the UI works.
+
+A feature is complete when:
+
+* requirements are implemented
+* backend validation exists
+* authorization exists
+* database integrity is preserved
+* error states are handled
+* tests exist
+* relevant tests pass
+* no obvious security gap exists
+* UI is usable
+* documentation is updated where necessary
+
+---
+
+# 52. Final Rule
+
+When uncertain, prioritize in this order:
+
+```text
+1. Security
+2. Data integrity
+3. Correctness
+4. Authorization
+5. Auditability
+6. User experience
+7. Performance
+8. Convenience
+```
+
+Never sacrifice attendance integrity or authorization simply to make the interface easier.
+
+The system must remain faithful to the central principle:
+
+> A successful attendance record should represent a validated attendance event, while failed or suspicious attempts remain visible for appropriate review rather than being silently converted into verified attendance.

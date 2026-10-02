@@ -1,0 +1,1535 @@
+# Project Architecture
+
+## 1. Project Overview
+
+This project is a modern **University Attendance & Analytics System** designed to manage student attendance, courses, classes, users, academic records, reporting, and attendance analytics through a centralized web application.
+
+The architecture is designed around the following principles:
+
+* Clean and modular code
+* Reusable UI components
+* Strong separation of concerns
+* Scalable data architecture
+* Responsive design
+* Accessibility
+* Secure authentication and authorization
+* Data-driven dashboards
+* Consistent design tokens
+* Maintainable feature-based organization
+
+---
+
+# 2. Architecture Principles
+
+The application should follow these core principles:
+
+### 2.1 Component First
+
+UI should be constructed from reusable components rather than duplicated page-specific markup.
+
+### 2.2 Feature Driven
+
+Business functionality should be organized by feature rather than creating one large collection of unrelated files.
+
+### 2.3 Separation of Concerns
+
+The following responsibilities should remain separate:
+
+```text
+UI
+↓
+Components
+↓
+Feature Logic
+↓
+Services
+↓
+API
+↓
+Database
+```
+
+UI components should not directly communicate with the database.
+
+### 2.4 Single Source of Truth
+
+Global information such as:
+
+* Authentication
+* Current user
+* Theme
+* Application configuration
+* Academic session
+* Selected semester
+
+should have a controlled source of truth.
+
+### 2.5 Design-System Driven
+
+Colors, typography, spacing, radius, shadows and other visual values should use centralized design tokens.
+
+Hard-coded UI values should be avoided wherever practical.
+
+---
+
+# 3. High-Level Architecture
+
+```text
+┌───────────────────────────────────────────────┐
+│                    CLIENT                     │
+│                                               │
+│  Pages / Routes                               │
+│       ↓                                       │
+│  Feature Components                           │
+│       ↓                                       │
+│  Shared UI Components                         │
+│       ↓                                       │
+│  Hooks / State / Feature Logic                │
+└──────────────────────┬────────────────────────┘
+                       │
+                       ▼
+┌───────────────────────────────────────────────┐
+│                 SERVICE LAYER                 │
+│                                               │
+│  Authentication Service                       │
+│  Student Service                              │
+│  Course Service                               │
+│  Attendance Service                           │
+│  Analytics Service                            │
+│  Notification Service                         │
+│  Reporting Service                            │
+└──────────────────────┬────────────────────────┘
+                       │
+                       ▼
+┌───────────────────────────────────────────────┐
+│                    API                        │
+│                                               │
+│  Authentication                               │
+│  Users                                         │
+│  Students                                      │
+│  Lecturers                                     │
+│  Courses                                       │
+│  Classes                                       │
+│  Attendance                                    │
+│  Analytics                                     │
+│  Reports                                       │
+│  Notifications                                 │
+└──────────────────────┬────────────────────────┘
+                       │
+                       ▼
+┌───────────────────────────────────────────────┐
+│                  DATABASE                     │
+│                                               │
+│  Users                                         │
+│  Students                                      │
+│  Lecturers                                     │
+│  Courses                                       │
+│  Classes                                       │
+│  Enrollments                                   │
+│  Attendance                                    │
+│  Academic Sessions                             │
+│  Notifications                                 │
+│  Audit Logs                                    │
+└───────────────────────────────────────────────┘
+```
+
+---
+
+# 4. Recommended Technology Structure
+
+The application should use a modern TypeScript-based web architecture.
+
+Recommended stack:
+
+```text
+Frontend
+├── React (SPA)
+├── TypeScript
+├── React Router
+└── Tailwind CSS
+
+UI
+├── Custom Design System
+├── Reusable Components
+└── Accessible UI primitives
+
+State
+├── Server State
+└── Client State
+
+Backend
+├── REST API or equivalent typed API layer
+├── Authentication
+└── Business Logic
+
+Database
+└── Relational Database
+
+Validation
+└── Shared TypeScript schemas
+
+Charts
+└── Analytics / visualization library
+```
+
+The architecture should remain framework-friendly enough that individual technologies can be replaced without rewriting the entire application.
+
+---
+
+# 5. Folder Architecture
+
+Recommended project structure:
+
+```text
+src/
+│
+├── pages/
+│   ├── App.tsx
+│   ├── index.css
+│   │
+│   ├── auth/
+│   │   ├── Login.tsx
+│   │   ├── ForgotPassword.tsx
+│   │   └── ResetPassword.tsx
+│   │
+│   ├── Dashboard.tsx
+│   │
+│   ├── students/
+│   │
+│   ├── lecturers/
+│   │
+│   ├── courses/
+│   │
+│   ├── classes/
+│   │
+│   ├── attendance/
+│   │
+│   ├── analytics/
+│   │
+│   ├── reports/
+│   │
+│   ├── notifications/
+│   │
+│   └── settings/
+│
+├── components/
+│   ├── ui/
+│   ├── layout/
+│   ├── navigation/
+│   ├── forms/
+│   ├── tables/
+│   ├── charts/
+│   ├── feedback/
+│   └── data-display/
+│
+├── features/
+│   ├── auth/
+│   ├── dashboard/
+│   ├── students/
+│   ├── lecturers/
+│   ├── courses/
+│   ├── classes/
+│   ├── attendance/
+│   ├── analytics/
+│   ├── reports/
+│   ├── notifications/
+│   └── settings/
+│
+├── services/
+│   ├── api/
+│   ├── auth/
+│   ├── students/
+│   ├── courses/
+│   ├── attendance/
+│   ├── analytics/
+│   ├── reports/
+│   └── notifications/
+│
+├── hooks/
+│
+├── lib/
+│   ├── api/
+│   ├── auth/
+│   ├── validation/
+│   ├── formatting/
+│   ├── permissions/
+│   └── utilities/
+│
+├── types/
+│
+├── config/
+│
+├── constants/
+│
+├── styles/
+│   ├── tokens.css
+│   ├── typography.css
+│   └── themes.css
+│
+└── assets/
+    ├── images/
+    ├── icons/
+    └── fonts/
+```
+
+---
+
+# 6. Application Layout
+
+The authenticated application should use a consistent dashboard shell.
+
+```text
+┌─────────────────────────────────────────────────────┐
+│                    TOP BAR                           │
+│ Logo       Search        Notifications   Profile    │
+├───────────────┬─────────────────────────────────────┤
+│               │                                     │
+│   SIDEBAR     │             MAIN CONTENT            │
+│               │                                     │
+│ Dashboard     │  Breadcrumb                         │
+│ Students      │                                     │
+│ Courses       │  Page Header                         │
+│ Classes       │                                     │
+│ Attendance    │  Content                             │
+│ Analytics     │                                     │
+│ Reports       │                                     │
+│ Notifications │                                     │
+│ Settings      │                                     │
+│               │                                     │
+└───────────────┴─────────────────────────────────────┘
+```
+
+The sidebar should support:
+
+* Expanded mode
+* Collapsed mode
+* Mobile drawer
+* Active route indicator
+* Permission-based navigation
+
+---
+
+# 7. Core Application Modules
+
+## 7.1 Authentication
+
+Responsible for:
+
+* Login
+* Logout
+* Password recovery
+* Password reset
+* Session management
+* User identity
+* Role-based access
+
+Roles should be configurable rather than hard-coded throughout the application.
+
+Recommended roles:
+
+```text
+SUPER_ADMIN
+ADMIN
+LECTURER
+STUDENT
+```
+
+Additional roles can be introduced without restructuring the application.
+
+---
+
+# 8. Dashboard
+
+The dashboard provides a high-level overview of the institution's attendance activity.
+
+Primary dashboard metrics:
+
+```text
+Total Students
+Total Courses
+Today's Classes
+Overall Attendance
+Present Today
+Absent Today
+Late Today
+At-Risk Students
+```
+
+Dashboard components:
+
+```text
+KPI Cards
+Attendance Trend
+Attendance Distribution
+Recent Attendance
+Today's Classes
+At-Risk Students
+Recent Activity
+Quick Actions
+```
+
+---
+
+# 9. Student Module
+
+The student module manages student information.
+
+Capabilities:
+
+* Student listing
+* Student search
+* Student filtering
+* Student profile
+* Enrollment information
+* Attendance history
+* Attendance statistics
+* Course registration
+* Academic information
+
+Student profile structure:
+
+```text
+Student
+├── Personal Information
+├── Academic Information
+├── Enrollment
+├── Courses
+├── Attendance
+├── Attendance Analytics
+└── Activity
+```
+
+---
+
+# 10. Lecturer Module
+
+Lecturers should be able to:
+
+* View assigned courses
+* View assigned classes
+* Record attendance
+* Edit attendance where permitted
+* View attendance statistics
+* View student attendance
+* Generate reports
+
+---
+
+# 11. Course Module
+
+Course management should support:
+
+* Course creation
+* Course editing
+* Course deletion
+* Course search
+* Course filtering
+* Course assignment
+* Student enrollment
+* Lecturer assignment
+
+Course data:
+
+```text
+Course
+├── Course Code
+├── Course Name
+├── Department
+├── Credit Hours
+├── Lecturer
+├── Semester
+├── Academic Session
+└── Enrolled Students
+```
+
+---
+
+# 12. Class Module
+
+Classes represent scheduled teaching sessions.
+
+Class information:
+
+```text
+Class
+├── Course
+├── Lecturer
+├── Room
+├── Date
+├── Start Time
+├── End Time
+├── Academic Session
+└── Attendance
+```
+
+The system should support recurring schedules where required.
+
+---
+
+# 13. Attendance Module
+
+Attendance is the core operational feature.
+
+Attendance states:
+
+```text
+PRESENT
+ABSENT
+LATE
+EXCUSED
+NOT_RECORDED
+```
+
+Attendance workflow:
+
+```text
+Class Created
+      ↓
+Students Enrolled
+      ↓
+Class Begins
+      ↓
+Lecturer Opens Attendance
+      ↓
+Students Marked
+      ↓
+Attendance Submitted
+      ↓
+Attendance Validated
+      ↓
+Analytics Updated
+      ↓
+Reports Available
+```
+
+Attendance should maintain an audit trail.
+
+Changes should record:
+
+```text
+User
+Timestamp
+Previous Status
+New Status
+Reason
+```
+
+---
+
+# 14. Attendance Analytics
+
+Analytics should transform raw attendance records into useful information.
+
+Core metrics:
+
+```text
+Attendance Rate
+Absence Rate
+Late Rate
+Excused Rate
+Total Classes
+Classes Attended
+Classes Missed
+Attendance Trend
+```
+
+Recommended visualizations:
+
+```text
+Line Chart
+    Attendance over time
+
+Bar Chart
+    Attendance by course
+
+Donut Chart
+    Attendance distribution
+
+Horizontal Bar
+    Student attendance ranking
+
+Heatmap
+    Attendance by day/time
+
+Progress Bar
+    Individual attendance percentage
+```
+
+Charts should use the centralized chart color tokens defined in the design system.
+
+---
+
+# 15. At-Risk Student Detection
+
+The system should identify students whose attendance requires attention.
+
+The threshold should be configurable.
+
+Example:
+
+```text
+attendanceRate < configuredThreshold
+```
+
+The application should not hard-code a specific academic policy unless that policy has been formally defined.
+
+At-risk indicators may include:
+
+```text
+Low Attendance
+Frequent Absence
+Repeated Lateness
+Rapid Attendance Decline
+```
+
+---
+
+# 16. Reporting
+
+The reporting module should support:
+
+* Student attendance reports
+* Course attendance reports
+* Lecturer reports
+* Department reports
+* Date-range reports
+* Academic-session reports
+* Attendance summaries
+
+Export formats may include:
+
+```text
+PDF
+CSV
+Excel
+```
+
+Reports should respect user permissions.
+
+---
+
+# 17. Notification System
+
+Notifications can be generated for:
+
+```text
+Attendance Reminder
+Low Attendance
+Class Reminder
+Attendance Updated
+Report Generated
+System Announcement
+```
+
+Notification structure:
+
+```text
+Notification
+├── ID
+├── Recipient
+├── Type
+├── Title
+├── Message
+├── Read Status
+├── Created At
+└── Read At
+```
+
+---
+
+# 18. State Management
+
+Separate state into two categories.
+
+## Server State
+
+Used for:
+
+* Students
+* Courses
+* Classes
+* Attendance
+* Analytics
+* Reports
+* Notifications
+
+Server state should support:
+
+```text
+Caching
+Loading states
+Error states
+Refetching
+Pagination
+Optimistic updates where appropriate
+```
+
+## Client State
+
+Used for:
+
+* Sidebar state
+* Modal state
+* Filters
+* Temporary form state
+* Theme
+* UI preferences
+
+Avoid putting server data into global client state unless there is a clear reason.
+
+---
+
+# 19. API Architecture
+
+API endpoints should be organized around resources.
+
+Example:
+
+```text
+/api/auth
+/api/users
+/api/students
+/api/lecturers
+/api/courses
+/api/classes
+/api/attendance
+/api/analytics
+/api/reports
+/api/notifications
+```
+
+Example attendance operations:
+
+```text
+GET    /api/attendance
+GET    /api/attendance/:id
+POST   /api/attendance
+PATCH  /api/attendance/:id
+DELETE /api/attendance/:id
+```
+
+The API should validate all incoming data.
+
+Never rely exclusively on frontend validation.
+
+---
+
+# 20. Database Architecture
+
+Recommended relational entities:
+
+```text
+users
+students
+lecturers
+departments
+courses
+classes
+enrollments
+attendance
+academic_sessions
+semesters
+notifications
+reports
+audit_logs
+```
+
+Relationships:
+
+```text
+User
+ ├── Student
+ └── Lecturer
+
+Department
+ └── Courses
+
+Course
+ ├── Classes
+ └── Enrollments
+
+Student
+ ├── Enrollments
+ └── Attendance
+
+Class
+ └── Attendance
+
+User
+ └── Audit Logs
+```
+
+Foreign keys and database constraints should enforce data integrity.
+
+---
+
+# 21. Design System Architecture
+
+All visual design should use centralized tokens.
+
+```text
+Design System
+│
+├── Colors
+├── Typography
+├── Spacing
+├── Border Radius
+├── Shadows
+├── Icons
+├── Motion
+├── Breakpoints
+└── Components
+```
+
+The primary brand color is:
+
+```text
+#16587E
+```
+
+Primary typography:
+
+```text
+Plus Jakarta Sans
+```
+
+Data typography:
+
+```text
+DM Mono
+```
+
+---
+
+# 22. Typography Rules
+
+Typography hierarchy:
+
+```text
+Display Large       48px
+Display Medium      40px
+Display Small       32px
+
+H1                  28px
+H2                  24px
+H3                  20px
+H4                  18px
+H5                  16px
+
+Body Large          16px
+Body Medium         14px
+Body Small          13px
+Body XS             12px
+```
+
+Analytics numbers should use:
+
+```text
+DM Mono
+```
+
+Normal UI text should use:
+
+```text
+Plus Jakarta Sans
+```
+
+Typography should never be selected arbitrarily on individual pages.
+
+---
+
+# 23. Spacing System
+
+Use a consistent 4px-based spacing scale.
+
+```text
+4px
+8px
+12px
+16px
+20px
+24px
+32px
+40px
+48px
+64px
+80px
+96px
+```
+
+Common usage:
+
+```text
+Input padding          12px / 16px
+Card padding           20px / 24px
+Section gap            32px
+Page content gap       24px
+Dashboard grid gap     20px
+```
+
+---
+
+# 24. Border Radius
+
+Recommended radius system:
+
+```text
+radius.xs       4px
+radius.sm       6px
+radius.md       8px
+radius.lg       12px
+radius.xl       16px
+radius.2xl      20px
+radius.full     9999px
+```
+
+Recommended usage:
+
+```text
+Inputs            8px
+Buttons           8px
+Cards             12px
+Modals            16px
+Badges            9999px
+Avatars           9999px
+```
+
+---
+
+# 25. Component Architecture
+
+Reusable components should include:
+
+```text
+Button
+Input
+Select
+Checkbox
+Radio
+Switch
+Textarea
+
+Card
+KpiCard
+StatCard
+ChartCard
+
+Table
+DataTable
+Pagination
+FilterBar
+
+Badge
+StatusBadge
+Avatar
+Tooltip
+
+Modal
+Drawer
+Dropdown
+Popover
+
+Toast
+Alert
+EmptyState
+LoadingState
+ErrorState
+
+Sidebar
+Topbar
+Breadcrumb
+PageHeader
+
+LineChart
+BarChart
+DonutChart
+AttendanceHeatmap
+ProgressChart
+```
+
+Components should have predictable APIs and avoid excessive configuration.
+
+---
+
+# 26. Loading States
+
+Every data-driven component should support:
+
+```text
+Loading
+Success
+Empty
+Error
+```
+
+Example:
+
+```text
+Loading:
+Skeleton UI
+
+Empty:
+"No attendance records found."
+
+Error:
+"Unable to load attendance data."
+
+Success:
+Display data
+```
+
+Avoid showing blank spaces while data is loading.
+
+---
+
+# 27. Error Handling
+
+Errors should be handled at multiple levels.
+
+```text
+API Error
+    ↓
+Service Layer
+    ↓
+Feature Logic
+    ↓
+UI Error State
+```
+
+User-facing errors should be understandable.
+
+Avoid displaying raw backend errors.
+
+Example:
+
+```text
+Bad:
+500 INTERNAL_SERVER_ERROR
+
+Good:
+"We couldn't load the attendance records. Please try again."
+```
+
+---
+
+# 28. Accessibility
+
+The application should target WCAG 2.2 AA principles.
+
+Requirements:
+
+* Keyboard navigation
+* Visible focus states
+* Semantic HTML
+* Accessible form labels
+* Screen-reader support
+* Sufficient color contrast
+* Accessible tables
+* Accessible dialogs
+* Accessible charts
+* Reduced-motion support
+
+Color should never be the only method of communicating attendance status.
+
+For example:
+
+```text
+Present    ✓ Present
+Absent     × Absent
+Late       ! Late
+Excused    — Excused
+```
+
+---
+
+# 29. Responsive Architecture
+
+Breakpoints:
+
+```text
+Mobile      < 640px
+Tablet      640px – 1023px
+Desktop     1024px – 1279px
+Large       1280px+
+```
+
+Desktop:
+
+```text
+Sidebar + Main Content
+```
+
+Tablet:
+
+```text
+Collapsed Sidebar + Main Content
+```
+
+Mobile:
+
+```text
+Top Bar
++
+Drawer Navigation
++
+Single-column Content
+```
+
+Dashboard cards should automatically adapt:
+
+```text
+Desktop:
+4 columns
+
+Tablet:
+2 columns
+
+Mobile:
+1 column
+```
+
+---
+
+# 30. Security
+
+Security should be treated as a core architectural concern.
+
+Requirements:
+
+* Secure authentication
+* Password hashing
+* Session expiration
+* Role-based authorization
+* Server-side permission checks
+* Input validation
+* API authorization
+* Audit logging
+* Secure cookies where applicable
+* Protection against common injection attacks
+* Protection against unauthorized data access
+
+Frontend route protection must never replace backend authorization.
+
+---
+
+# 31. Audit Logging
+
+Important actions should generate audit records.
+
+Examples:
+
+```text
+User Created
+User Updated
+Student Created
+Course Created
+Attendance Submitted
+Attendance Modified
+Attendance Deleted
+Report Generated
+Permission Changed
+```
+
+Audit record:
+
+```text
+{
+  userId,
+  action,
+  entity,
+  entityId,
+  timestamp,
+  metadata
+}
+```
+
+---
+
+# 32. Performance
+
+The application should prioritize:
+
+```text
+Fast initial load
+Efficient API requests
+Pagination
+Lazy loading
+Image optimization
+Component memoization where useful
+Chart optimization
+Server-side data fetching where appropriate
+Caching
+```
+
+Large tables should not load thousands of records into the browser at once.
+
+Use pagination or virtualization where necessary.
+
+---
+
+# 33. Search and Filtering
+
+Search should support relevant entities:
+
+```text
+Students
+Courses
+Lecturers
+Classes
+Attendance
+Reports
+```
+
+Filters should be composable.
+
+Example:
+
+```text
+Attendance
+├── Academic Session
+├── Semester
+├── Department
+├── Course
+├── Lecturer
+├── Date Range
+└── Attendance Status
+```
+
+---
+
+# 34. URL State
+
+Filters that users may want to share or revisit should be represented in URL parameters where practical.
+
+Example:
+
+```text
+/attendance?
+course=CS101
+&semester=first
+&status=absent
+&dateFrom=2026-09-01
+```
+
+This improves:
+
+* Shareability
+* Browser navigation
+* Deep linking
+* Refresh persistence
+
+---
+
+# 35. Analytics Data Flow
+
+```text
+Attendance Records
+        ↓
+Data Validation
+        ↓
+Aggregation
+        ↓
+Analytics Service
+        ↓
+Calculated Metrics
+        ↓
+Charts / KPI Cards / Reports
+```
+
+Calculated analytics should have clearly defined formulas.
+
+Example:
+
+```text
+Attendance Rate =
+Present Sessions / Expected Sessions × 100
+```
+
+The system should keep raw attendance records separate from calculated analytics.
+
+---
+
+# 36. Data Consistency
+
+Attendance changes should trigger appropriate recalculation or cache invalidation.
+
+Example:
+
+```text
+Attendance Updated
+        ↓
+Invalidate Attendance Query
+        ↓
+Invalidate Student Attendance Summary
+        ↓
+Invalidate Course Attendance Summary
+        ↓
+Invalidate Dashboard Metrics
+        ↓
+Refresh UI
+```
+
+---
+
+# 37. Theme Architecture
+
+The application should support:
+
+```text
+Light Mode
+Dark Mode
+System Preference
+```
+
+Theme values should come from design tokens.
+
+Do not create separate component-specific colors.
+
+Example:
+
+```text
+Component
+    ↓
+Semantic Token
+    ↓
+Theme Token
+    ↓
+Color Value
+```
+
+---
+
+# 38. File Naming Conventions
+
+Use consistent naming.
+
+Components:
+
+```text
+PascalCase.tsx
+```
+
+Examples:
+
+```text
+AttendanceCard.tsx
+StudentTable.tsx
+PageHeader.tsx
+```
+
+Hooks:
+
+```text
+useCamelCase.ts
+```
+
+Examples:
+
+```text
+useAttendance.ts
+useStudents.ts
+usePermissions.ts
+```
+
+Utilities:
+
+```text
+camelCase.ts
+```
+
+Examples:
+
+```text
+formatDate.ts
+calculateAttendance.ts
+```
+
+Types:
+
+```text
+camelCase.types.ts
+```
+
+---
+
+# 39. Component Responsibility Rules
+
+A component should generally have one clear responsibility.
+
+Avoid:
+
+```text
+Dashboard.tsx
+```
+
+containing:
+
+```text
+API calls
+Database logic
+Authentication
+Chart calculations
+Table logic
+Navigation
+UI
+```
+
+Instead:
+
+```text
+Dashboard
+├── DashboardHeader
+├── AttendanceOverview
+├── AttendanceTrend
+├── AttendanceDistribution
+├── RecentAttendance
+└── AtRiskStudents
+```
+
+Each feature should own its business-specific logic.
+
+---
+
+# 40. Testing Architecture
+
+Testing should exist at multiple levels.
+
+```text
+Unit Tests
+    ↓
+Component Tests
+    ↓
+Integration Tests
+    ↓
+End-to-End Tests
+```
+
+Important flows to test:
+
+```text
+Login
+Logout
+Student creation
+Course creation
+Enrollment
+Attendance submission
+Attendance editing
+Analytics calculation
+Report generation
+Permission enforcement
+```
+
+---
+
+# 41. Environment Configuration
+
+Environment-specific values should not be hard-coded.
+
+Example:
+
+```text
+.env.local
+.env.development
+.env.production
+```
+
+Configuration may include:
+
+```text
+API URL
+Database URL
+Authentication configuration
+Storage configuration
+Analytics configuration
+Application URL
+```
+
+Secrets must never be committed to source control.
+
+---
+
+# 42. Development Workflow
+
+Recommended workflow:
+
+```text
+Feature Request
+      ↓
+Architecture / Data Model
+      ↓
+UI Design
+      ↓
+Component Design
+      ↓
+API / Service
+      ↓
+Implementation
+      ↓
+Validation
+      ↓
+Testing
+      ↓
+Accessibility Review
+      ↓
+Performance Review
+      ↓
+Production
+```
+
+---
+
+# 43. Definition of Done
+
+A feature is considered complete when:
+
+* UI is responsive
+* Loading state exists
+* Empty state exists
+* Error state exists
+* Accessibility has been considered
+* Permissions are enforced
+* API validation exists
+* Relevant tests exist
+* Design tokens are used
+* No unnecessary duplication exists
+* Mobile layout works
+* Dark mode is supported where applicable
+* Analytics are validated where applicable
+
+---
+
+# 44. Architectural Goal
+
+The final application should feel like a **premium academic analytics platform**, not a collection of disconnected CRUD screens.
+
+The experience should emphasize:
+
+```text
+Clarity
+Consistency
+Speed
+Data Visibility
+Accessibility
+Trust
+Scalability
+```
+
+The visual system should combine:
+
+```text
+#16587E
++
+Plus Jakarta Sans
++
+DM Mono
++
+Clean Data Visualization
++
+Generous Spacing
++
+Subtle Borders
++
+Minimal Elevation
+```
+
+The result should be a modern, structured and distinctive attendance-management experience that can scale from a single department to a complete university-wide platform.

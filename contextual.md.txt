@@ -1,0 +1,1715 @@
+# Contextual Specification
+
+## 1. Product Context
+
+This project is a modern **University Attendance & Analytics System**.
+
+The system is designed to help academic institutions manage attendance digitally while transforming attendance records into useful academic insights.
+
+The platform should support the complete attendance lifecycle:
+
+```text
+Academic Setup
+      ↓
+Students & Lecturers
+      ↓
+Courses & Classes
+      ↓
+Attendance Recording
+      ↓
+Attendance Validation
+      ↓
+Analytics
+      ↓
+Reports
+      ↓
+Intervention & Follow-up
+```
+
+The product should not feel like a basic attendance register.
+
+It should feel like a **central academic intelligence platform** where attendance is captured once and then becomes useful across dashboards, student profiles, analytics, reports and notifications.
+
+---
+
+# 2. Product Vision
+
+The system should make attendance:
+
+* Easy to record
+* Easy to understand
+* Difficult to manipulate accidentally
+* Useful for decision-making
+* Accessible to students and lecturers
+* Actionable for administrators
+
+The product should reduce the amount of manual work required to:
+
+* Record attendance
+* Review attendance
+* Identify attendance problems
+* Produce reports
+* Monitor academic participation
+
+---
+
+# 3. Core Product Philosophy
+
+The application should follow five principles.
+
+## 3.1 Capture Once
+
+Attendance should be recorded once and reused throughout the system.
+
+For example:
+
+```text
+Attendance Record
+       ↓
+Student Profile
+       ↓
+Course Statistics
+       ↓
+Dashboard
+       ↓
+Analytics
+       ↓
+Reports
+```
+
+Do not create independent versions of the same attendance data for different screens.
+
+---
+
+## 3.2 Make Data Understandable
+
+Raw numbers are not enough.
+
+Instead of only displaying:
+
+```text
+94.72%
+```
+
+the system should provide context:
+
+```text
+94.72%
+Overall Attendance
+
++3.42%
+Compared with previous period
+```
+
+Where useful, the system should explain what a metric means.
+
+---
+
+## 3.3 Reduce Cognitive Load
+
+The interface should prioritize the most important information.
+
+Users should not need to interpret complex tables before understanding the current situation.
+
+Use:
+
+* Clear hierarchy
+* Progressive disclosure
+* Meaningful labels
+* Familiar interactions
+* Consistent patterns
+
+---
+
+## 3.4 Context Before Action
+
+Users should have enough information to understand an action before performing it.
+
+For example, before submitting attendance:
+
+```text
+Course:
+CS101 — Introduction to Computing
+
+Date:
+24 September 2026
+
+Time:
+10:00 AM – 12:00 PM
+
+Students:
+86
+
+Attendance:
+82 Present
+3 Absent
+1 Late
+```
+
+Then provide:
+
+```text
+Submit Attendance
+```
+
+---
+
+## 3.5 Data Should Lead to Action
+
+Analytics should not exist only for visualization.
+
+For example:
+
+```text
+Low Attendance
+      ↓
+Identify Student
+      ↓
+Review Attendance History
+      ↓
+Identify Pattern
+      ↓
+Take Appropriate Action
+```
+
+---
+
+# 4. Target Users
+
+The platform has four primary user groups.
+
+```text
+SUPER_ADMIN
+ADMIN
+LECTURER
+STUDENT
+```
+
+The exact permission set should be configurable.
+
+---
+
+# 5. Super Administrator Context
+
+The Super Administrator manages the overall system.
+
+Typical responsibilities:
+
+* System configuration
+* User management
+* Role management
+* Institution configuration
+* Academic session configuration
+* Department configuration
+* System monitoring
+* Audit review
+
+The Super Administrator should have access to system-level settings that other roles cannot access.
+
+---
+
+# 6. Administrator Context
+
+Administrators manage academic operations.
+
+Typical responsibilities:
+
+* Manage students
+* Manage lecturers
+* Manage courses
+* Manage departments
+* Manage classes
+* Manage academic sessions
+* Review attendance
+* Generate reports
+* Monitor analytics
+
+Administrators should be able to see information across their authorized academic scope.
+
+---
+
+# 7. Lecturer Context
+
+Lecturers primarily interact with:
+
+```text
+Courses
+Classes
+Students
+Attendance
+Attendance Analytics
+Reports
+```
+
+The lecturer experience should prioritize speed.
+
+A lecturer should be able to move from:
+
+```text
+Dashboard
+→ Today's Class
+→ Attendance
+→ Submit
+```
+
+with minimal interaction.
+
+The system should not overwhelm lecturers with administrative features they do not need.
+
+---
+
+# 8. Student Context
+
+Students primarily need visibility into their own academic participation.
+
+Student functionality may include:
+
+* Personal profile
+* Registered courses
+* Class schedule
+* Attendance history
+* Attendance percentage
+* Attendance trends
+* Notifications
+* Academic reports where authorized
+
+Students should not have access to another student's private academic information.
+
+---
+
+# 9. Role-Based Access Context
+
+Permissions should be evaluated server-side.
+
+A role should determine what a user can:
+
+```text
+View
+Create
+Update
+Delete
+Export
+Approve
+Configure
+```
+
+Example:
+
+```text
+Student
+├── View own attendance
+├── View own courses
+└── View own profile
+
+Lecturer
+├── View assigned courses
+├── View assigned students
+├── Record attendance
+└── View authorized analytics
+
+Administrator
+├── Manage students
+├── Manage lecturers
+├── Manage courses
+├── Manage classes
+├── Review attendance
+└── Generate reports
+```
+
+Permissions should be configurable rather than scattered throughout the UI.
+
+---
+
+# 10. Academic Context
+
+The application should understand academic structures.
+
+The basic hierarchy is:
+
+```text
+Institution
+    ↓
+Faculty / School
+    ↓
+Department
+    ↓
+Programme
+    ↓
+Academic Session
+    ↓
+Semester
+    ↓
+Course
+    ↓
+Class
+    ↓
+Enrollment
+    ↓
+Attendance
+```
+
+Not every institution will use every level.
+
+The architecture should therefore allow academic structures to be configured.
+
+---
+
+# 11. Academic Session
+
+An academic session represents an academic year or period.
+
+Example:
+
+```text
+2026/2027
+```
+
+A session may contain:
+
+```text
+First Semester
+Second Semester
+```
+
+The system should avoid assuming that every institution uses the same number or naming of semesters.
+
+---
+
+# 12. Course Context
+
+A course represents an academic subject.
+
+Example:
+
+```text
+CS101
+Introduction to Computing
+```
+
+Course information may include:
+
+```text
+Course Code
+Course Name
+Department
+Programme
+Credit Hours
+Academic Session
+Semester
+Assigned Lecturer
+```
+
+---
+
+# 13. Class Context
+
+A class is a scheduled teaching instance of a course.
+
+Example:
+
+```text
+CS101
+Monday
+10:00 AM – 12:00 PM
+Room B204
+```
+
+A course may have multiple classes or sessions.
+
+Therefore:
+
+```text
+Course ≠ Class Session
+```
+
+The course represents the academic subject.
+
+The class session represents a specific teaching occurrence.
+
+---
+
+# 14. Enrollment Context
+
+Students must be enrolled in courses before their attendance can normally be recorded.
+
+Relationship:
+
+```text
+Student
+   ↓
+Enrollment
+   ↓
+Course
+```
+
+An enrollment may contain:
+
+```text
+Student
+Course
+Academic Session
+Semester
+Status
+Enrollment Date
+```
+
+Possible enrollment statuses:
+
+```text
+ACTIVE
+DROPPED
+COMPLETED
+WITHDRAWN
+```
+
+---
+
+# 15. Attendance Context
+
+Attendance represents a student's participation in a specific class session.
+
+A record should conceptually contain:
+
+```text
+Student
+Class
+Status
+Timestamp
+Recorded By
+Updated At
+```
+
+Attendance statuses:
+
+```text
+PRESENT
+ABSENT
+LATE
+EXCUSED
+NOT_RECORDED
+```
+
+---
+
+# 16. Attendance Status Definitions
+
+## PRESENT
+
+The student attended the class within the accepted attendance conditions.
+
+## ABSENT
+
+The student did not attend the class and has no approved exception recorded.
+
+## LATE
+
+The student attended but arrived after the defined attendance threshold.
+
+## EXCUSED
+
+The absence or attendance exception has been formally recognized according to institutional policy.
+
+## NOT_RECORDED
+
+Attendance has not yet been submitted.
+
+`NOT_RECORDED` should not automatically be treated as `ABSENT`.
+
+---
+
+# 17. Attendance Workflow
+
+Standard workflow:
+
+```text
+Class Scheduled
+      ↓
+Class Begins
+      ↓
+Lecturer Opens Attendance
+      ↓
+Student List Loaded
+      ↓
+Attendance Marked
+      ↓
+Attendance Reviewed
+      ↓
+Attendance Submitted
+      ↓
+Attendance Locked / Finalized
+      ↓
+Analytics Updated
+```
+
+The exact locking policy should be configurable.
+
+---
+
+# 18. Attendance Editing
+
+Attendance modifications should be controlled.
+
+If an attendance record is changed after submission, the system should retain an audit record.
+
+Example:
+
+```text
+Original:
+ABSENT
+
+Changed To:
+PRESENT
+
+Changed By:
+Lecturer
+
+Changed At:
+24 September 2026, 2:15 PM
+
+Reason:
+Approved attendance correction
+```
+
+The system should never silently overwrite important historical attendance information.
+
+---
+
+# 19. Attendance Analytics Context
+
+Attendance analytics should provide both:
+
+### Descriptive information
+
+What happened?
+
+Example:
+
+```text
+Attendance this semester: 91.4%
+```
+
+### Trend information
+
+How has it changed?
+
+Example:
+
+```text
+Attendance increased by 3.2 percentage points
+compared with the previous reporting period.
+```
+
+### Distribution information
+
+Where is attendance concentrated?
+
+Example:
+
+```text
+Present: 91%
+Absent: 5%
+Late: 3%
+Excused: 1%
+```
+
+---
+
+# 20. Attendance Percentage
+
+The calculation should be clearly defined.
+
+Default conceptual formula:
+
+```text
+Attendance Rate =
+Eligible Attended Sessions
+÷
+Eligible Sessions
+×
+100
+```
+
+The institution may define whether:
+
+* Late counts as attended
+* Excused sessions are excluded
+* Cancelled classes are excluded
+* Not-recorded sessions are excluded
+
+These rules should be configurable.
+
+Do not silently assume an academic policy.
+
+---
+
+# 21. At-Risk Context
+
+The platform may identify students whose attendance requires attention.
+
+The system should use configurable rules.
+
+Example:
+
+```text
+IF attendanceRate < configuredThreshold
+THEN status = AT_RISK
+```
+
+Additional signals may include:
+
+```text
+Repeated Absences
+Repeated Lateness
+Declining Attendance
+Consecutive Absences
+```
+
+The system should distinguish between:
+
+```text
+Metric
+```
+
+and:
+
+```text
+Institutional Decision
+```
+
+Analytics can identify patterns, while authorized staff determine the appropriate intervention.
+
+---
+
+# 22. Dashboard Context
+
+The dashboard should answer:
+
+> "What do I need to know right now?"
+
+For administrators:
+
+```text
+Overall Attendance
+Attendance Trend
+Today's Classes
+Students Requiring Attention
+Course Attendance
+Recent Activity
+```
+
+For lecturers:
+
+```text
+Today's Classes
+Attendance To Record
+Recent Attendance
+Course Statistics
+Students Requiring Attention
+```
+
+For students:
+
+```text
+My Attendance
+My Courses
+Upcoming Classes
+Attendance Trend
+Notifications
+```
+
+Dashboard content should therefore be role-aware.
+
+---
+
+# 23. KPI Context
+
+KPI cards should answer one clear question.
+
+Good:
+
+```text
+Overall Attendance
+94.72%
+
++3.42% from previous period
+```
+
+Avoid ambiguous cards such as:
+
+```text
+Attendance
+94.72
+```
+
+Every metric should have:
+
+```text
+Value
+Label
+Context
+```
+
+Where applicable.
+
+---
+
+# 24. Analytics Context
+
+Analytics should allow users to move between levels of detail.
+
+Example:
+
+```text
+University
+   ↓
+Faculty
+   ↓
+Department
+   ↓
+Programme
+   ↓
+Course
+   ↓
+Class
+   ↓
+Student
+```
+
+This allows users to investigate patterns without overwhelming the initial dashboard.
+
+---
+
+# 25. Filtering Context
+
+Filters should be relevant to the current page.
+
+Common filters:
+
+```text
+Academic Session
+Semester
+Department
+Programme
+Course
+Lecturer
+Date Range
+Attendance Status
+```
+
+Do not display every possible filter by default.
+
+Use progressive disclosure for advanced filtering.
+
+---
+
+# 26. Search Context
+
+Search should be entity-aware.
+
+Examples:
+
+```text
+Student:
+Search by name, student ID
+
+Course:
+Search by code or name
+
+Lecturer:
+Search by name or staff ID
+```
+
+Search results should clearly identify what was matched.
+
+---
+
+# 27. Table Context
+
+Tables should prioritize scanning.
+
+Recommended structure:
+
+```text
+Name
+ID
+Course
+Attendance
+Status
+Last Activity
+Actions
+```
+
+Avoid putting too many unrelated columns into one table.
+
+On smaller screens, tables should:
+
+* Become horizontally scrollable
+* Hide secondary columns
+* Provide a mobile-friendly alternative
+* Preserve the most important information
+
+---
+
+# 28. Forms Context
+
+Forms should be short and structured.
+
+Group related fields.
+
+Example:
+
+```text
+Student Information
+├── Full Name
+├── Student ID
+└── Contact Information
+
+Academic Information
+├── Programme
+├── Department
+└── Academic Session
+```
+
+Validation should happen:
+
+```text
+Client-side
++
+Server-side
+```
+
+---
+
+# 29. Empty State Context
+
+An empty state should explain why there is no information.
+
+Bad:
+
+```text
+No data.
+```
+
+Better:
+
+```text
+No attendance records yet.
+
+Attendance will appear here after a class
+has been completed and submitted.
+```
+
+Where possible, provide an appropriate action.
+
+---
+
+# 30. Error Context
+
+Errors should be human-readable.
+
+Bad:
+
+```text
+ERR_ATTENDANCE_500
+```
+
+Better:
+
+```text
+We couldn't save the attendance.
+Check your connection and try again.
+```
+
+The interface should preserve user-entered information whenever possible.
+
+---
+
+# 31. Confirmation Context
+
+Confirmation should be proportional to risk.
+
+For low-risk actions:
+
+```text
+Save
+```
+
+may be sufficient.
+
+For destructive actions:
+
+```text
+Delete Course?
+```
+
+The dialog should explain:
+
+```text
+This action cannot be undone.
+```
+
+For attendance changes, explain the consequences when appropriate.
+
+---
+
+# 32. Notification Context
+
+Notifications should be:
+
+* Relevant
+* Actionable
+* Timely
+* Non-intrusive
+
+Examples:
+
+```text
+Attendance Reminder
+"Attendance for CS101 has not been submitted."
+
+Low Attendance
+"Your attendance in CS204 has fallen below the configured threshold."
+
+Report Ready
+"Your attendance report is ready to view."
+```
+
+---
+
+# 33. Visual Context
+
+The visual language should feel:
+
+```text
+Modern
+Professional
+Academic
+Precise
+Calm
+Data-focused
+Trustworthy
+```
+
+Avoid excessive:
+
+* Gradients
+* Decorative illustrations
+* Heavy shadows
+* Excessive rounded containers
+* Large amounts of saturated color
+* Unnecessary animation
+
+The design should communicate information before decoration.
+
+---
+
+# 34. Brand Color Context
+
+Primary brand:
+
+```text
+#16587E
+```
+
+The primary color should be used for:
+
+* Primary actions
+* Navigation emphasis
+* Active states
+* Links
+* Important data visualization
+* Brand elements
+
+Do not use the primary color for every element.
+
+Use neutral surfaces to create hierarchy.
+
+---
+
+# 35. Typography Context
+
+Primary typeface:
+
+```text
+Plus Jakarta Sans
+```
+
+Data typeface:
+
+```text
+DM Mono
+```
+
+Use:
+
+```text
+Plus Jakarta Sans
+```
+
+for:
+
+* Navigation
+* Headings
+* Body text
+* Buttons
+* Forms
+* Tables
+
+Use:
+
+```text
+DM Mono
+```
+
+for:
+
+* KPI numbers
+* Percentages
+* IDs
+* Course codes
+* Timestamps
+* Analytical values
+
+---
+
+# 36. Motion Context
+
+Motion should communicate state rather than decorate the interface.
+
+Use subtle animation for:
+
+```text
+Page transitions
+Modal opening
+Dropdowns
+Toast notifications
+Loading
+Chart rendering
+Sidebar transitions
+```
+
+Avoid excessive movement.
+
+Respect:
+
+```text
+prefers-reduced-motion
+```
+
+---
+
+# 37. Accessibility Context
+
+Accessibility is part of the product experience rather than a final testing step.
+
+The system should support:
+
+* Keyboard navigation
+* Screen readers
+* Focus management
+* Sufficient contrast
+* Accessible labels
+* Semantic markup
+* Reduced motion
+* Clear error messages
+
+Color should not be the only indication of state.
+
+For example:
+
+```text
+✓ Present
+× Absent
+! Late
+— Excused
+```
+
+---
+
+# 38. Privacy Context
+
+Attendance and academic information is sensitive institutional data.
+
+The application should follow the principle of:
+
+```text
+Minimum Necessary Access
+```
+
+A user should only access information required for their role.
+
+Examples:
+
+```text
+Student
+→ Own attendance
+
+Lecturer
+→ Assigned classes and students
+
+Administrator
+→ Authorized academic scope
+```
+
+Sensitive information should not appear in URLs, logs or client-side storage unnecessarily.
+
+---
+
+# 39. Audit Context
+
+Important changes should be traceable.
+
+Audit events may include:
+
+```text
+Login
+Logout
+User Creation
+Role Change
+Course Creation
+Course Update
+Attendance Submission
+Attendance Modification
+Attendance Deletion
+Report Generation
+Configuration Change
+```
+
+Audit logs should include:
+
+```text
+Actor
+Action
+Entity
+Entity ID
+Timestamp
+Relevant Metadata
+```
+
+---
+
+# 40. Reporting Context
+
+Reports should answer specific questions.
+
+Examples:
+
+### Student Report
+
+```text
+How has this student's attendance changed?
+```
+
+### Course Report
+
+```text
+How is attendance performing in this course?
+```
+
+### Department Report
+
+```text
+What attendance patterns exist across the department?
+```
+
+### Date Report
+
+```text
+What attendance activity occurred during this period?
+```
+
+Reports should clearly identify:
+
+```text
+Reporting Period
+Academic Session
+Semester
+Scope
+Generated At
+```
+
+---
+
+# 41. Mobile Context
+
+The mobile experience should prioritize tasks rather than attempting to reproduce the desktop interface exactly.
+
+Primary mobile actions:
+
+```text
+View Attendance
+Record Attendance
+View Classes
+View Notifications
+View Profile
+```
+
+Complex analytics can progressively reveal additional information.
+
+---
+
+# 42. Desktop Context
+
+Desktop provides the primary environment for:
+
+* Administration
+* Analytics
+* Reporting
+* Data management
+* Large attendance tables
+
+The desktop dashboard should take advantage of available screen space without creating excessive visual density.
+
+---
+
+# 43. Contextual Navigation
+
+Navigation should reflect user goals.
+
+Primary navigation:
+
+```text
+Dashboard
+Students
+Courses
+Classes
+Attendance
+Analytics
+Reports
+Notifications
+Settings
+```
+
+Items should be displayed according to role permissions.
+
+Do not show navigation options that the user cannot access.
+
+---
+
+# 44. Breadcrumb Context
+
+Breadcrumbs should be used where users navigate several levels deep.
+
+Example:
+
+```text
+Students
+  / Computer Science
+  / John Mensah
+  / Attendance
+```
+
+Breadcrumbs should help users understand where they are and return to previous levels.
+
+---
+
+# 45. Data Integrity Context
+
+The system should prioritize correctness over convenience.
+
+Important rules:
+
+```text
+A student cannot have duplicate enrollment
+for the same course and academic period.
+
+A class must belong to a valid course.
+
+An attendance record must reference
+a valid student and class.
+
+Attendance should not be recorded for
+a student who is not eligible for that class.
+
+Deleted or modified attendance should
+remain auditable where required.
+```
+
+---
+
+# 46. Time and Date Context
+
+Dates and times should be displayed according to the user's configured or institutionally defined timezone.
+
+Store timestamps in a consistent backend format.
+
+Display them in a human-friendly format.
+
+Example:
+
+```text
+Backend:
+2026-09-24T10:30:00Z
+
+UI:
+24 Sep 2026
+10:30 AM
+```
+
+Relative timestamps may be used where useful:
+
+```text
+2 minutes ago
+Yesterday
+3 days ago
+```
+
+---
+
+# 47. Localization Context
+
+The system should be designed so that localization can be added later.
+
+Avoid hard-coding:
+
+* Date formats
+* Currency formats
+* Language-specific strings
+* Weekday assumptions
+* Semester naming
+
+UI text should be centralized where practical.
+
+---
+
+# 48. Internationalization Context
+
+Text should be structured so that translation does not require rewriting components.
+
+Avoid:
+
+```text
+<span>
+  Welcome {name}, you have {count} notifications.
+</span>
+```
+
+when the sentence structure needs to change across languages.
+
+Prefer a translation-aware message system.
+
+---
+
+# 49. Product Tone
+
+The application's language should be:
+
+```text
+Clear
+Professional
+Direct
+Respectful
+Helpful
+Concise
+```
+
+Avoid overly technical messages for ordinary users.
+
+Avoid:
+
+```text
+Operation failed due to an internal exception.
+```
+
+Prefer:
+
+```text
+We couldn't complete that action.
+Please try again.
+```
+
+---
+
+# 50. Terminology
+
+Use consistent terminology throughout the application.
+
+Preferred:
+
+```text
+Student
+Lecturer
+Course
+Class
+Attendance
+Academic Session
+Semester
+Department
+Programme
+Report
+Notification
+```
+
+Do not alternate between:
+
+```text
+Student / Learner / Pupil
+```
+
+unless the institution explicitly uses different terms.
+
+Similarly, use one consistent term for:
+
+```text
+Lecturer / Instructor / Teacher
+```
+
+---
+
+# 51. Product Language Rules
+
+Use sentence case for most UI labels.
+
+Prefer:
+
+```text
+Attendance overview
+```
+
+instead of:
+
+```text
+ATTENDANCE OVERVIEW
+```
+
+Use uppercase sparingly for small contextual labels.
+
+Example:
+
+```text
+OVERVIEW
+```
+
+may be appropriate as an eyebrow label.
+
+---
+
+# 52. Analytics Interpretation
+
+The system should distinguish:
+
+```text
+Raw Data
+```
+
+from:
+
+```text
+Calculated Metric
+```
+
+and:
+
+```text
+Interpretation
+```
+
+Example:
+
+```text
+Raw:
+47 attended sessions
+
+Calculated:
+94% attendance rate
+
+Interpretation:
+Attendance increased compared with the
+previous reporting period.
+```
+
+The application should not imply causation unless the data supports it.
+
+---
+
+# 53. Empty / New Institution Context
+
+A newly configured institution may have no historical data.
+
+The interface should gracefully support:
+
+```text
+No students yet
+No courses yet
+No classes yet
+No attendance yet
+No reports yet
+```
+
+The system should guide administrators toward the next useful action.
+
+Example:
+
+```text
+No courses have been created.
+
+Create your first course
+```
+
+---
+
+# 54. Onboarding Context
+
+Initial setup should guide administrators through:
+
+```text
+Institution Setup
+      ↓
+Academic Session
+      ↓
+Departments
+      ↓
+Programmes
+      ↓
+Courses
+      ↓
+Lecturers
+      ↓
+Students
+      ↓
+Enrollment
+      ↓
+Classes
+      ↓
+Attendance
+```
+
+Users should not be forced to configure unnecessary settings before they can begin using the core system.
+
+---
+
+# 55. Scalability Context
+
+The architecture should support growth from:
+
+```text
+One Department
+```
+
+to:
+
+```text
+Multiple Faculties
+Multiple Departments
+Thousands of Students
+Hundreds of Courses
+Large Attendance Datasets
+```
+
+The UI should remain understandable as the amount of data grows.
+
+---
+
+# 56. Performance Context
+
+Performance should be treated as part of UX.
+
+Priorities:
+
+```text
+Fast navigation
+Fast search
+Fast attendance recording
+Fast dashboard loading
+Efficient tables
+Efficient charts
+Minimal unnecessary network requests
+```
+
+Attendance recording should remain responsive even with large student lists.
+
+---
+
+# 57. Trust Context
+
+Because attendance affects academic records, users should have confidence in what the system displays.
+
+Trust should be supported through:
+
+```text
+Clear timestamps
+Audit history
+Transparent calculations
+Consistent terminology
+Permission controls
+Confirmation for important actions
+Reliable error handling
+```
+
+Avoid presenting uncertain calculations as definitive facts.
+
+---
+
+# 58. Future Expansion
+
+The architecture should leave room for future features such as:
+
+```text
+QR Attendance
+Biometric Integration
+Student ID Card Scanning
+Email Notifications
+SMS Notifications
+Mobile Application
+Parent / Guardian Access
+Academic Performance Integration
+Predictive Analytics
+Institution-wide Dashboards
+Multi-campus Support
+```
+
+These should be treated as future extensions rather than assumptions built into the initial implementation.
+
+---
+
+# 59. Non-Goals
+
+The initial system should not unnecessarily attempt to become:
+
+```text
+A complete Learning Management System
+A full Student Information System
+A Financial Management System
+A Human Resources System
+A complete Examination Management System
+```
+
+Those domains may integrate with the platform later.
+
+The initial product should remain focused on:
+
+```text
+Attendance
++
+Academic Participation
++
+Attendance Analytics
++
+Reporting
+```
+
+---
+
+# 60. Final Product Context
+
+The application should ultimately provide a simple mental model:
+
+```text
+Manage
+   ↓
+Record
+   ↓
+Understand
+   ↓
+Act
+```
+
+Administrators **manage** academic structures.
+
+Lecturers **record** attendance.
+
+Students and staff **understand** attendance patterns.
+
+Authorized users **act** on the resulting information.
+
+The system should make that journey clear, fast and reliable without overwhelming users with unnecessary complexity.
